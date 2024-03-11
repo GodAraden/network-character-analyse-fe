@@ -29,6 +29,7 @@ import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 import localeSettings from './zh-CN/settings';
 
 export default {
+  'title': '网络人物关联信息分析系统',
   'menu.dashboard': '仪表盘',
   'menu.server.dashboard': '仪表盘-服务端',
   'menu.server.workplace': '工作台-服务端',

@@ -29,6 +29,7 @@ import localeUserSetting from '@/views/user/setting/locale/en-US';
 import localeSettings from './en-US/settings';
 
 export default {
+  'title': 'Network Character Related Information Analysis System',
   'menu.dashboard': 'Dashboard',
   'menu.server.dashboard': 'Dashboard-Server',
   'menu.server.workplace': 'Workplace-Server',

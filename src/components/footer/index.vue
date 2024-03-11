@@ -1,16 +1,11 @@
 <template>
-  <a-layout-footer class="footer">Arco Pro</a-layout-footer>
+  <a-layout-footer class="footer text-center p-2">
+    <p class="select-none"> &copy; 2023 - 2024 By 2201110213 高宇航 </p>
+  </a-layout-footer>
 </template>
-
-<script lang="ts" setup></script>
 
 <style lang="less" scoped>
   .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
     color: var(--color-text-2);
-    text-align: center;
   }
 </style>
