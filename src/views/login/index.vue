@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <div class="logo">
       <img alt="logo" src="/logo.svg" width="36" />
       <div class="logo-text">{{ $t('title') }}</div>
@@ -23,12 +23,12 @@
 </script>
 
 <style lang="less" scoped>
-  .container {
+  .my-container {
     display: flex;
     height: 100vh;
 
     .banner {
-      width: 550px;
+      width: 720px;
       background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%);
     }
 
@@ -69,10 +69,14 @@
 <style lang="less" scoped>
   // responsive
   @media (max-width: @screen-lg) {
-    .container {
+    .my-container {
       .banner {
         display: none;
       }
+    }
+
+    .logo-text {
+      color: var(--color-fill-6);
     }
   }
 </style>

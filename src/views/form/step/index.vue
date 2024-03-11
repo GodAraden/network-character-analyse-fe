@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <Breadcrumb :items="['menu.form', 'menu.form.step']" />
     <a-spin :loading="loading" style="width: 100%">
       <a-card class="general-card">
@@ -94,7 +94,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     padding: 0 20px 20px 20px;
   }
   .wrapper {

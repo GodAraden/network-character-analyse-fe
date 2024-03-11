@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <Breadcrumb :items="['menu.user', 'menu.user.setting']" />
     <a-row style="margin-bottom: 16px">
       <a-col :span="24">
@@ -38,7 +38,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     padding: 0 20px 20px 20px;
   }
 

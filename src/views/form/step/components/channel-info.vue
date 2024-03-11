@@ -123,7 +123,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     .keep-margin {
       margin-bottom: 20px;
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <Breadcrumb
       :items="['menu.visualization', 'menu.visualization.dataAnalysis']"
     />
@@ -44,7 +44,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     padding: 0 20px 20px 20px;
     margin-bottom: 20px;
   }

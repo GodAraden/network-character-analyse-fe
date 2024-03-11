@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <Breadcrumb :items="['menu.exception', 'menu.exception.404']" />
     <div class="content">
       <a-result
@@ -29,7 +29,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     padding: 0 20px 20px 20px;
     height: calc(100% - 40px);
     :deep(.content) {

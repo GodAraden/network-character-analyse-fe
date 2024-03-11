@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <div class="left-side">
       <div class="panel">
         <Banner />
@@ -61,7 +61,7 @@
 </script>
 
 <style lang="less" scoped>
-  .container {
+  .my-container {
     background-color: var(--color-fill-2);
     padding: 16px 20px;
     padding-bottom: 0;
@@ -135,7 +135,7 @@
 <style lang="less" scoped>
   // responsive
   .mobile {
-    .container {
+    .my-container {
       display: block;
     }
     .right-side {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <Breadcrumb :items="['menu.profile', 'menu.profile.basic']" />
     <a-space direction="vertical" :size="16" fill>
       <a-card class="general-card" :title="$t('basicProfile.title.form')">
@@ -72,7 +72,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     padding: 0 20px 20px 20px;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="my-container">
     <Breadcrumb :items="['menu.result', 'menu.result.error']" />
     <div class="wrapper">
       <a-result
@@ -50,7 +50,7 @@
 </script>
 
 <style scoped lang="less">
-  .container {
+  .my-container {
     padding: 0 20px 20px 20px;
   }
   .wrapper {
