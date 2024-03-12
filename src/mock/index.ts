@@ -17,6 +17,8 @@ import '@/views/profile/basic/mock';
 import '@/views/visualization/data-analysis/mock';
 import '@/views/visualization/multi-dimension-data-analysis/mock';
 
+import '@/views/user-management/mock';
+
 import '@/views/user/info/mock';
 import '@/views/user/setting/mock';
 

@@ -26,6 +26,8 @@ import locale500 from '@/views/exception/500/locale/zh-CN';
 import localeUserInfo from '@/views/user/info/locale/zh-CN';
 import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 
+import localeUserManagement from '@/views/user-management/locale/zh-CN';
+
 import localeSettings from './zh-CN/settings';
 
 export default {
@@ -41,6 +43,7 @@ export default {
   'menu.profile': '详情页',
   'menu.visualization': '数据可视化',
   'menu.user': '个人中心',
+  'menu.user-management': '用户管理',
   'menu.arcoWebsite': 'Arco Design',
   'menu.faq': '常见问题',
   'navbar.docs': '文档中心',
@@ -65,4 +68,5 @@ export default {
   ...locale500,
   ...localeUserInfo,
   ...localeUserSetting,
+  ...localeUserManagement,
 };
