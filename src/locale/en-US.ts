@@ -44,7 +44,6 @@ export default {
   'menu.user': 'User Center',
   'menu.user-management': 'User Management',
   'menu.arcoWebsite': 'Arco Design',
-  'menu.faq': 'FAQ',
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
   ...localeSettings,
