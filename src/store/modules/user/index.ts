@@ -7,27 +7,19 @@ import {
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
-import { UserState } from './types';
+import { UserRole, UserState, UserStatus } from './types';
 import useAppStore from '../app';
 
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    name: undefined,
-    avatar: undefined,
-    job: undefined,
-    organization: undefined,
-    location: undefined,
-    email: undefined,
-    introduction: undefined,
-    personalWebsite: undefined,
-    jobName: undefined,
-    organizationName: undefined,
-    locationName: undefined,
-    phone: undefined,
-    registrationDate: undefined,
-    accountId: undefined,
-    certification: undefined,
-    role: '',
+    id: -1,
+    username: '',
+    nickname: '',
+    role: UserRole.NONE,
+    email: '',
+    avatar: '',
+    createTime: +new Date(),
+    status: UserStatus.ENABLE,
   }),
 
   getters: {
@@ -39,7 +31,8 @@ const useUserStore = defineStore('user', {
   actions: {
     switchRoles() {
       return new Promise((resolve) => {
-        this.role = this.role === 'user' ? 'admin' : 'user';
+        this.role =
+          this.role === UserRole.USER ? UserRole.ADMIN : UserRole.USER;
         resolve(this.role);
       });
     },

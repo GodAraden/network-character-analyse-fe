@@ -16,21 +16,10 @@ setupMock({
       if (isLogin()) {
         const role = window.localStorage.getItem('userRole') || 'admin';
         return successResponseWrap({
-          name: '王立群',
-          avatar: '',
-          email: 'wangliqun@email.com',
-          job: 'frontend',
-          jobName: '前端艺术家',
-          organization: 'Frontend',
-          organizationName: '前端',
-          location: 'beijing',
-          locationName: '北京',
-          introduction: '人潇洒，性温存',
-          personalWebsite: 'https://www.arco.design',
-          phone: '150****0000',
-          registrationDate: '2013-05-10 12:10:00',
-          accountId: '15012312300',
-          certification: 1,
+          username: 'gaoyuhang',
+          nickname: 'GodAraden',
+          avatar: 'https://www.araden.top/avatar.jpg',
+          email: 'me@araden.top',
           role,
         });
       }
@@ -64,41 +53,6 @@ setupMock({
     // 登出
     Mock.mock(new RegExp('/api/user/logout'), () => {
       return successResponseWrap(null);
-    });
-
-    // 用户的服务端菜单
-    Mock.mock(new RegExp('/api/user/menu'), () => {
-      const menuList = [
-        {
-          path: '/dashboard',
-          name: 'dashboard',
-          meta: {
-            locale: 'menu.server.dashboard',
-            requiresAuth: true,
-            icon: 'icon-dashboard',
-            order: 1,
-          },
-          children: [
-            {
-              path: 'workplace',
-              name: 'Workplace',
-              meta: {
-                locale: 'menu.server.workplace',
-                requiresAuth: true,
-              },
-            },
-            {
-              path: 'https://arco.design',
-              name: 'arcoWebsite',
-              meta: {
-                locale: 'menu.arcoWebsite',
-                requiresAuth: true,
-              },
-            },
-          ],
-        },
-      ];
-      return successResponseWrap(menuList);
     });
   },
 });

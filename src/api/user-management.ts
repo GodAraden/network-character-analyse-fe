@@ -1,14 +1,15 @@
 import axios from 'axios';
 import qs from 'query-string';
+import { UserRole, UserStatus } from '@/store/modules/user/types';
 
 export interface User {
   id: string;
   usernames: string;
   nickname: string;
-  role: 'admin' | 'user';
+  role: UserRole;
   email: string;
   createdTime: string;
-  status: 'enable' | 'disable';
+  status: UserStatus;
 }
 
 export interface QueryUserListReq extends Partial<User> {

@@ -7,8 +7,9 @@ export default {
   'userManagement.form.nickname.placeholder': '请输入昵称',
   'userManagement.form.email': '邮箱',
   'userManagement.form.email.placeholder': '请输入邮箱',
-
-  'userManagement.form.createdTime': '创建时间',
+  'userManagement.form.role': '角色',
+  'userManagement.form.role.user': '普通用户',
+  'userManagement.form.role.admin': '管理员',
   'userManagement.form.status': '状态',
   'userManagement.form.status.enable': '使用中',
   'userManagement.form.status.disable': '已停用',

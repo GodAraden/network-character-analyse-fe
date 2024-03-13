@@ -10,13 +10,13 @@
         <img :src="userInfo.avatar" />
       </a-avatar>
       <a-typography-title :heading="6" style="margin: 0">
-        {{ userInfo.name }}
+        {{ userInfo.nickname }}
       </a-typography-title>
       <div class="user-msg">
         <a-space :size="18">
           <div>
             <icon-idcard />
-            <a-typography-text>{{ userInfo.name }}</a-typography-text>
+            <a-typography-text>{{ userInfo.username }}</a-typography-text>
           </div>
           <div>
             <icon-user />
@@ -42,14 +42,9 @@
           </template>
           <template #description>
             <div class="content">
-              <a-typography-paragraph class="tip">
-                {{ userInfo.name }}
+              <a-typography-paragraph class="tip" editable>
+                {{ userInfo.nickname }}
               </a-typography-paragraph>
-            </div>
-            <div class="operation">
-              <a-link>
-                {{ $t('user.button.update') }}
-              </a-link>
             </div>
           </template>
         </a-list-item-meta>
@@ -63,14 +58,9 @@
           </template>
           <template #description>
             <div class="content">
-              <a-typography-paragraph class="tip">
+              <a-typography-paragraph class="tip" editable>
                 {{ $t('user.placeholder.password') }}
               </a-typography-paragraph>
-            </div>
-            <div class="operation">
-              <a-link>
-                {{ $t('user.button.update') }}
-              </a-link>
             </div>
           </template>
         </a-list-item-meta>
@@ -84,14 +74,10 @@
           </template>
           <template #description>
             <div class="content">
-              <a-typography-paragraph class="tip">
+              <a-typography-paragraph class="tip" editable>
+                <template #expand-node></template>
                 {{ userInfo.email }}
               </a-typography-paragraph>
-            </div>
-            <div class="operation">
-              <a-link>
-                {{ $t('user.button.update') }}
-              </a-link>
             </div>
           </template>
         </a-list-item-meta>
@@ -167,17 +153,8 @@
     flex: 1;
     border-bottom: 1px solid var(--color-neutral-3);
 
-    .arco-list-item-meta-description {
-      display: flex;
-      flex-flow: row;
-      justify-content: space-between;
-
-      .tip {
-        color: rgb(var(--gray-6));
-      }
-      .operation {
-        margin-right: 6px;
-      }
+    .tip {
+      color: rgb(var(--gray-6));
     }
   }
 </style>

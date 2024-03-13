@@ -58,12 +58,14 @@
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="createdTime"
-                  :label="$t('userManagement.form.createdTime')"
+                  field="role"
+                  :label="$t('userManagement.form.role')"
                 >
-                  <a-range-picker
-                    v-model="formModel.createdTime"
-                    style="width: 100%"
+                  <a-select
+                    v-model="formModel.role"
+                    allow-clear
+                    :options="roleOptions"
+                    :placeholder="$t('userManagement.form.selectDefault')"
                   />
                 </a-form-item>
               </a-col>
@@ -74,6 +76,7 @@
                 >
                   <a-select
                     v-model="formModel.status"
+                    allow-clear
                     :options="statusOptions"
                     :placeholder="$t('userManagement.form.selectDefault')"
                   />
@@ -196,6 +199,9 @@
         <template #index="{ rowIndex }">
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
         </template>
+        <template #role="{ record }">
+          {{ $t(`userManagement.form.role.${record.role}`) }}
+        </template>
         <template #status="{ record }">
           <span v-if="record.status === 'disable'" class="circle error"></span>
           <span v-else class="circle pass"></span>
@@ -206,9 +212,9 @@
             :content="
               $t('userManagement.columns.operations.tip.status', {
                 method: $t(
-                  `userManagement.columns.operations.${
-                    record.status === 'disable' ? 'enable' : 'disable'
-                  }`
+                  `userManagement.columns.operations.${getStatuOperation(
+                    record.status
+                  )}`
                 ),
                 nickname: record.nickname,
                 username: record.username,
@@ -222,9 +228,9 @@
             >
               {{
                 $t(
-                  `userManagement.columns.operations.${
-                    record.status === 'disable' ? 'enable' : 'disable'
-                  }`
+                  `userManagement.columns.operations.${getStatuOperation(
+                    record.status
+                  )}`
                 )
               }}
             </a-button>
@@ -245,6 +251,7 @@
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
+  import { UserRole, UserStatus } from '@/store/modules/user/types';
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
@@ -255,8 +262,8 @@
       username: '',
       nickname: '',
       email: '',
-      createdTime: [],
-      status: '',
+      role: undefined,
+      status: undefined,
     };
   };
   const { loading, setLoading } = useLoading(true);
@@ -309,6 +316,7 @@
     {
       title: t('userManagement.columns.role'),
       dataIndex: 'role',
+      slotName: 'role',
     },
     {
       title: t('userManagement.columns.email'),
@@ -329,14 +337,24 @@
       slotName: 'operations',
     },
   ]);
+  const roleOptions = computed<SelectOptionData[]>(() => [
+    {
+      label: t('userManagement.form.role.admin'),
+      value: UserRole.ADMIN,
+    },
+    {
+      label: t('userManagement.form.role.user'),
+      value: UserRole.USER,
+    },
+  ]);
   const statusOptions = computed<SelectOptionData[]>(() => [
     {
       label: t('userManagement.form.status.enable'),
-      value: 'enable',
+      value: UserStatus.ENABLE,
     },
     {
       label: t('userManagement.form.status.disable'),
-      value: 'disable',
+      value: UserStatus.DISABLE,
     },
   ]);
   const fetchData = async (
@@ -368,6 +386,12 @@
   fetchData();
   const reset = () => {
     formModel.value = generateFormModel();
+  };
+
+  const getStatuOperation = (current: UserStatus) => {
+    return current === UserStatus.DISABLE
+      ? UserStatus.ENABLE
+      : UserStatus.DISABLE;
   };
 
   const handleSelectDensity = (

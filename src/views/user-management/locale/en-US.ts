@@ -7,11 +7,12 @@ export default {
   'userManagement.form.nickname.placeholder': 'Please enter a nickname',
   'userManagement.form.email': 'Email',
   'userManagement.form.email.placeholder': 'Please enter your email',
-
-  'userManagement.form.createdTime': 'Creation time',
+  'userManagement.form.role': 'role',
+  'userManagement.form.role.user': 'User',
+  'userManagement.form.role.admin': 'Admin',
   'userManagement.form.status': 'status',
-  'userManagement.form.status.enable': 'In use',
-  'userManagement.form.status.disable': 'Deprecated',
+  'userManagement.form.status.enable': 'Enable',
+  'userManagement.form.status.disable': 'Disable',
   'userManagement.form.search': 'query',
   'userManagement.form.reset': 'Reset',
   'userManagement.form.selectDefault': 'All',
@@ -28,8 +29,8 @@ export default {
   'userManagement.columns.createdTime': 'Creation time',
   'userManagement.columns.status': 'status',
   'userManagement.columns.operations': 'Operations',
-  'userManagement.columns.operations.enable': 'Enable',
-  'userManagement.columns.operations.disable': 'Deprecated',
+  'userManagement.columns.operations.enable': 'enable',
+  'userManagement.columns.operations.disable': 'disable',
   'userManagement.columns.operations.tip.status':
     'Are you sure you want {method} user {nickname}({username})? ',
 
