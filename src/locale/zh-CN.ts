@@ -11,17 +11,8 @@ import localeCardList from '@/views/list/card/locale/zh-CN';
 import localeStepForm from '@/views/form/step/locale/zh-CN';
 import localeGroupForm from '@/views/form/group/locale/zh-CN';
 
-import localeBasicProfile from '@/views/profile/basic/locale/zh-CN';
-
 import localeDataAnalysis from '@/views/visualization/data-analysis/locale/zh-CN';
 import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/zh-CN';
-
-import localeSuccess from '@/views/result/success/locale/zh-CN';
-import localeError from '@/views/result/error/locale/zh-CN';
-
-import locale403 from '@/views/exception/403/locale/zh-CN';
-import locale404 from '@/views/exception/404/locale/zh-CN';
-import locale500 from '@/views/exception/500/locale/zh-CN';
 
 import localeUserInfo from '@/views/user/locale/zh-CN';
 
@@ -56,14 +47,8 @@ export default {
   ...localeCardList,
   ...localeStepForm,
   ...localeGroupForm,
-  ...localeBasicProfile,
   ...localeDataAnalysis,
   ...localeMultiDAnalysis,
-  ...localeSuccess,
-  ...localeError,
-  ...locale403,
-  ...locale404,
-  ...locale500,
   ...localeUserInfo,
   ...localeUserManagement,
 };
