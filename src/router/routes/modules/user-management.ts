@@ -3,7 +3,7 @@ import { AppRouteRecordRaw } from '../types';
 
 const USERMANAGEMENT: AppRouteRecordRaw = {
   path: '/user-management',
-  name: 'user-management',
+  name: 'UserManagement',
   component: DEFAULT_LAYOUT,
   redirect: '/user-management',
   meta: {
@@ -17,12 +17,8 @@ const USERMANAGEMENT: AppRouteRecordRaw = {
   children: [
     {
       path: '',
-      name: 'user-management',
+      name: 'UserManagement',
       component: () => import('@/views/user-management/index.vue'),
-      meta: {
-        locale: 'menu.user-management.dataAnalysis',
-        requiresAuth: true,
-      },
     },
   ],
 };
