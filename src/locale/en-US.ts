@@ -14,6 +14,9 @@ import localeGroupForm from '@/views/form/group/locale/en-US';
 import localeDataAnalysis from '@/views/visualization/data-analysis/locale/en-US';
 import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/en-US';
 
+import localeRuleEditor from '@/views/rule/editor/locale/en-US';
+import localeRuleManagement from '@/views/rule/management/locale/en-US';
+
 import localeUserInfo from '@/views/user/locale/en-US';
 
 import localeUserManagement from '@/views/user-management/locale/en-US';
@@ -23,15 +26,10 @@ import localeSettings from './en-US/settings';
 export default {
   'title': 'Network Character Related Information Analysis System',
   'menu.dashboard': 'Dashboard',
-  'menu.server.dashboard': 'Dashboard-Server',
-  'menu.server.workplace': 'Workplace-Server',
-  'menu.server.monitor': 'Monitor-Server',
   'menu.list': 'List',
-  'menu.result': 'Result',
-  'menu.exception': 'Exception',
   'menu.form': 'Form',
-  'menu.profile': 'Profile',
   'menu.visualization': 'Data Visualization',
+  'menu.rule': 'Rule Configuration',
   'menu.user': 'User Center',
   'menu.user-management': 'User Management',
   'menu.arcoWebsite': 'Arco Design',
@@ -49,6 +47,8 @@ export default {
   ...localeGroupForm,
   ...localeDataAnalysis,
   ...localeMultiDAnalysis,
+  ...localeRuleEditor,
+  ...localeRuleManagement,
   ...localeUserInfo,
   ...localeUserManagement,
 };
