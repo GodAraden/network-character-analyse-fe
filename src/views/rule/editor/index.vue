@@ -42,7 +42,7 @@
     BaseInfoModel,
     ChannelInfoModel,
     UnitChannelModel,
-  } from '@/api/form';
+  } from '@/api/rule';
   import BaseInfo from './components/base-info.vue';
   import ChannelInfo from './components/channel-info.vue';
   import Success from './components/success.vue';

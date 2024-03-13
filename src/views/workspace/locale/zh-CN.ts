@@ -1,5 +1,4 @@
 export default {
-  'menu.workspace': '工作台',
   'workspace.welcome': '欢迎回来！',
   'workspace.balance': '余额（元）',
   'workspace.order.pending': '待支付',

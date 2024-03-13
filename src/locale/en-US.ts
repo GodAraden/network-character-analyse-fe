@@ -3,14 +3,10 @@ import localeLogin from '@/views/login/locale/en-US';
 
 import localeWorkspace from '@/views/workspace/locale/en-US';
 
-import localeSearchTable from '@/views/list/search-table/locale/en-US';
-import localeCardList from '@/views/list/card/locale/en-US';
+import localeQueryManagement from '@/views/query/management/locale/en-US';
+import localeQueryStart from '@/views/query/start/locale/en-US';
 
-import localeStepForm from '@/views/form/step/locale/en-US';
-import localeGroupForm from '@/views/form/group/locale/en-US';
-
-import localeDataAnalysis from '@/views/visualization/data-analysis/locale/en-US';
-import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/en-US';
+import localeMultiDAnalysis from '@/views/query/result/locale/en-US';
 
 import localeRuleEditor from '@/views/rule/editor/locale/en-US';
 import localeRuleManagement from '@/views/rule/management/locale/en-US';
@@ -23,10 +19,8 @@ import localeSettings from './en-US/settings';
 
 export default {
   'title': 'Network Character Related Information Analysis System',
-  'menu.dashboard': 'Dashboard',
-  'menu.list': 'List',
-  'menu.form': 'Form',
-  'menu.visualization': 'Data Visualization',
+  'menu.workspace': 'Workspace',
+  'menu.query': 'Query Information',
   'menu.rule': 'Rule Configuration',
   'menu.user': 'User Center',
   'menu.user-management': 'User Management',
@@ -38,11 +32,8 @@ export default {
   ...localeLogin,
   ...localeWorkspace,
 
-  ...localeSearchTable,
-  ...localeCardList,
-  ...localeStepForm,
-  ...localeGroupForm,
-  ...localeDataAnalysis,
+  ...localeQueryManagement,
+  ...localeQueryStart,
   ...localeMultiDAnalysis,
   ...localeRuleEditor,
   ...localeRuleManagement,

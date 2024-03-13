@@ -2,6 +2,26 @@ import axios from 'axios';
 import qs from 'query-string';
 import type { DescData } from '@arco-design/web-vue/es/descriptions/interface';
 
+export interface BaseInfoModel {
+  activityName: string;
+  channelType: string;
+  promotionTime: string[];
+  promoteLink: string;
+}
+export interface ChannelInfoModel {
+  advertisingSource: string;
+  advertisingMedia: string;
+  keyword: string[];
+  pushNotify: boolean;
+  advertisingContent: string;
+}
+
+export type UnitChannelModel = BaseInfoModel & ChannelInfoModel;
+
+export function submitChannelForm(data: UnitChannelModel) {
+  return axios.post('/api/channel-form/submit', { data });
+}
+
 export interface PolicyRecord {
   id: string;
   number: number;

@@ -3,14 +3,10 @@ import localeLogin from '@/views/login/locale/zh-CN';
 
 import localeWorkspace from '@/views/workspace/locale/zh-CN';
 
-import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
-import localeCardList from '@/views/list/card/locale/zh-CN';
+import localeQueryManagement from '@/views/query/management/locale/zh-CN';
+import localeQueryStart from '@/views/query/start/locale/zh-CN';
 
-import localeStepForm from '@/views/form/step/locale/zh-CN';
-import localeGroupForm from '@/views/form/group/locale/zh-CN';
-
-import localeDataAnalysis from '@/views/visualization/data-analysis/locale/zh-CN';
-import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/zh-CN';
+import localeMultiDAnalysis from '@/views/query/result/locale/zh-CN';
 
 import localeRuleEditor from '@/views/rule/editor/locale/zh-CN';
 import localeRuleManagement from '@/views/rule/management/locale/zh-CN';
@@ -23,10 +19,8 @@ import localeSettings from './zh-CN/settings';
 
 export default {
   'title': '网络人物关联信息分析系统',
-  'menu.dashboard': '仪表盘',
-  'menu.list': '列表页',
-  'menu.form': '表单页',
-  'menu.visualization': '数据可视化',
+  'menu.workspace': '工作台',
+  'menu.query': '信息获取',
   'menu.rule': '规则配置',
   'menu.user': '个人中心',
   'menu.user-management': '用户管理',
@@ -38,11 +32,8 @@ export default {
   ...localeLogin,
   ...localeWorkspace,
 
-  ...localeSearchTable,
-  ...localeCardList,
-  ...localeStepForm,
-  ...localeGroupForm,
-  ...localeDataAnalysis,
+  ...localeQueryManagement,
+  ...localeQueryStart,
   ...localeMultiDAnalysis,
   ...localeRuleEditor,
   ...localeRuleManagement,

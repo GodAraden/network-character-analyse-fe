@@ -5,13 +5,9 @@ import './message-box';
 
 import '@/views/workspace/mock';
 
-import '@/views/list/card/mock';
-import '@/views/list/search-table/mock';
+import '@/views/query/management/mock';
 
-import '@/views/form/step/mock';
-
-import '@/views/visualization/data-analysis/mock';
-import '@/views/visualization/multi-dimension-data-analysis/mock';
+import '@/views/query/result/mock';
 
 import '@/views/user-management/mock';
 

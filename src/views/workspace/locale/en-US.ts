@@ -1,5 +1,4 @@
 export default {
-  'menu.workspace': 'Workspace',
   'workspace.welcome': 'Welcome!',
   'workspace.balance': 'Balance (CNY)',
   'workspace.order.pending': 'Pending',
