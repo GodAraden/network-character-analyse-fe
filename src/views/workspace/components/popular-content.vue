@@ -6,10 +6,10 @@
       :body-style="{ padding: '17px 20px 21px 20px' }"
     >
       <template #title>
-        {{ $t('workplace.popularContent') }}
+        {{ $t('workspace.popularContent') }}
       </template>
       <template #extra>
-        <a-link>{{ $t('workplace.viewMore') }}</a-link>
+        <a-link>{{ $t('workspace.viewMore') }}</a-link>
       </template>
       <a-space direction="vertical" :size="10" fill>
         <a-radio-group
@@ -18,13 +18,13 @@
           @change="typeChange as any"
         >
           <a-radio value="text">
-            {{ $t('workplace.popularContent.text') }}
+            {{ $t('workspace.popularContent.text') }}
           </a-radio>
           <a-radio value="image">
-            {{ $t('workplace.popularContent.image') }}
+            {{ $t('workspace.popularContent.image') }}
           </a-radio>
           <a-radio value="video">
-            {{ $t('workplace.popularContent.video') }}
+            {{ $t('workspace.popularContent.video') }}
           </a-radio>
         </a-radio-group>
         <a-table

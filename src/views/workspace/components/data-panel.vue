@@ -12,7 +12,7 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.onlineContent')"
+          :title="$t('workspace.onlineContent')"
           :value="373.5"
           :precision="1"
           :value-from="0"
@@ -20,7 +20,7 @@
           show-group-separator
         >
           <template #suffix>
-            W+ <span class="unit">{{ $t('workplace.pecs') }}</span>
+            W+ <span class="unit">{{ $t('workspace.pecs') }}</span>
           </template>
         </a-statistic>
       </a-space>
@@ -37,14 +37,14 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.putIn')"
+          :title="$t('workspace.putIn')"
           :value="368"
           :value-from="0"
           animation
           show-group-separator
         >
           <template #suffix>
-            <span class="unit">{{ $t('workplace.pecs') }}</span>
+            <span class="unit">{{ $t('workspace.pecs') }}</span>
           </template>
         </a-statistic>
       </a-space>
@@ -61,14 +61,14 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.newDay')"
+          :title="$t('workspace.newDay')"
           :value="8874"
           :value-from="0"
           animation
           show-group-separator
         >
           <template #suffix>
-            <span class="unit">{{ $t('workplace.pecs') }}</span>
+            <span class="unit">{{ $t('workspace.pecs') }}</span>
           </template>
         </a-statistic>
       </a-space>
@@ -86,7 +86,7 @@
           />
         </a-avatar>
         <a-statistic
-          :title="$t('workplace.newFromYesterday')"
+          :title="$t('workspace.newFromYesterday')"
           :value="2.8"
           :precision="1"
           :value-from="0"

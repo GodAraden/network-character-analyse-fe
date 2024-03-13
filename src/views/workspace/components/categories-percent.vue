@@ -8,7 +8,7 @@
       }"
     >
       <template #title>
-        {{ $t('workplace.categoriesPercent') }}
+        {{ $t('workspace.categoriesPercent') }}
       </template>
       <Chart height="310px" :option="chartOption" />
     </a-card>

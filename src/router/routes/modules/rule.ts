@@ -10,6 +10,7 @@ const RULE: AppRouteRecordRaw = {
     requiresAuth: true,
     icon: 'icon-settings',
     order: 5,
+    roles: ['admin'],
   },
   children: [
     {
@@ -19,7 +20,6 @@ const RULE: AppRouteRecordRaw = {
       meta: {
         locale: 'menu.rule.editor',
         requiresAuth: true,
-        roles: ['admin'],
       },
     },
     {
@@ -29,7 +29,6 @@ const RULE: AppRouteRecordRaw = {
       meta: {
         locale: 'menu.rule.management',
         requiresAuth: true,
-        roles: ['*'],
       },
     },
   ],

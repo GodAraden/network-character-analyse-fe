@@ -5,7 +5,7 @@
         {{ $t('dataAnalysis.popularAuthor') }}
       </template>
       <template #extra>
-        <a-link>{{ $t('workplace.viewMore') }}</a-link>
+        <a-link>{{ $t('workspace.viewMore') }}</a-link>
       </template>
       <a-table
         :data="tableData.list"
