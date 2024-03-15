@@ -1,43 +1,28 @@
 export default {
-  'menu.query.start': 'Start Program',
-  'query.start.title.video': 'Video Parameters',
-  'query.start.title.audio': 'Audio Parameters',
-  'query.start.title.description': 'Enter Description',
-  'query.start.form.label.video.mode': 'Match Mode',
-  'query.start.form.label.video.acquisition.resolution':
-    'Acquisition Resolution',
-  'query.start.form.label.video.acquisition.frameRate':
-    'Acquisition Frame Rate',
-  'query.start.form.label.video.encoding.resolution': 'Encoding Resolution',
-  'query.start.form.label.video.encoding.rate.min': 'Encoding Min Rate',
-  'query.start.form.label.video.encoding.rate.max': 'Encoding Max Rate',
-  'query.start.form.label.video.encoding.rate.default': 'Encoding Default Rate',
-  'query.start.form.label.video.encoding.frameRate': 'Encoding Frame Rate',
-  'query.start.form.label.video.encoding.profile': 'Encoding Profile',
-  'query.start.placeholder.video.mode': 'Please Select',
-  'query.start.placeholder.video.acquisition.resolution': 'Please Select',
-  'query.start.placeholder.video.acquisition.frameRate': 'Enter Range [1, 30]',
-  'query.start.placeholder.video.encoding.resolution': 'Please Select',
-  'query.start.placeholder.video.encoding.rate.min': 'Enter Range [150, 1800]',
-  'query.start.placeholder.video.encoding.rate.max': 'Enter Range [150, 1800]',
-  'query.start.placeholder.video.encoding.rate.default':
-    'Enter Range [150, 1800]',
-  'query.start.placeholder.video.encoding.frameRate': 'Enter Range [1, 30]',
-  'query.start.placeholder.video.encoding.profile': 'Enter Range [150, 1800]',
-  'query.start.form.label.audio.mode': 'Match Mode',
-  'query.start.form.label.audio.acquisition.channels': 'Acquisition Channels',
-  'query.start.form.label.audio.encoding.rate': 'Encoding Rate',
-  'query.start.form.label.audio.encoding.channels': 'Encoding Channels',
-  'query.start.placeholder.audio.encoding.channels': 'Enter Range [150, 1800]',
-  'query.start.form.label.audio.encoding.profile': 'Encoding Profile',
-  'query.start.placeholder.audio.mode': 'Please Select',
-  'query.start.placeholder.audio.acquisition.channels': 'Please Select',
-  'query.start.placeholder.audio.encoding.rate': 'Enter Range [150, 1800]',
-  'query.start.placeholder.audio.encoding.profile': 'Enter Range [1, 30]',
-  'query.start.form.label.parameterDescription': 'Parameter Description',
-  // https://vue-i18n.intlify.dev/guide/essentials/syntax.html#list-interpolation
-  'query.start.placeholder.description': `Please fill in the parameter description with a maximum of 200 words`,
+  'menu.query.start': 'Start program',
+  'query.start.form.label.ruleId': 'Rule',
+  'query.start.form.placeholder.ruleId': 'Please select rule',
+  'query.start.form.error.ruleId.required': 'Please select rule',
+  'query.start.form.error.ruleId.pattern': '',
+  'query.start.form.label.header': 'Header',
+  'query.start.form.placeholder.header':
+    'JSON format. Apply to all requests in this round of queries',
+  'query.start.form.error.header.required': 'Please enter a request header',
+  'query.start.form.error.header.pattern':
+    'Please enter a correctly formatted request header',
+  'query.start.form.label.params': 'Parameters',
+  'query.start.form.placeholder.params':
+    'JSON format, applied to all requests in this round of queries, can be modified based on the resolve rules in the rule item after a request',
+  'query.start.form.error.params.required': 'Please enter request parameters',
+  'query.start.form.error.params.pattern':
+    'Please enter request parameters in the correct format',
+  'query.start.form.label.other': 'Others',
+  'query.start.form.placeholder.other':
+    'JSON format, containing information to be added',
+  'query.start.form.error.other.pattern':
+    'Please enter information in JSON format',
   'query.start.submit': 'Submit',
   'query.start.reset': 'Reset',
-  'query.start.submitSuccess': 'Submit Success',
+  'query.start.submitSuccess':
+    'Query #{id} started successfully, ready to jump',
 };

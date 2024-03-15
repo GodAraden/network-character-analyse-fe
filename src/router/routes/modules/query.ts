@@ -3,7 +3,7 @@ import { AppRouteRecordRaw } from '../types';
 
 const LIST: AppRouteRecordRaw = {
   path: '/query',
-  name: 'query',
+  name: 'Query',
   component: DEFAULT_LAYOUT,
   meta: {
     locale: 'menu.query',

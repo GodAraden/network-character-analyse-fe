@@ -126,3 +126,18 @@ export function queryTheServiceList() {
 export function queryRulesPresetList() {
   return axios.get('/api/list/rules-preset');
 }
+
+export interface StartQueryReq {
+  ruleId: string;
+  header: string;
+  params: string;
+  other: string;
+}
+export interface StartQueryRes {
+  id: string;
+}
+
+export async function startQuery(params: StartQueryReq) {
+  const { data } = await axios.post<StartQueryRes>('/api/query/start', params);
+  return data;
+}

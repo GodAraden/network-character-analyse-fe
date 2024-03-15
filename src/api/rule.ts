@@ -34,8 +34,8 @@ export async function updateRule(params: UpdateRuleReq) {
 }
 
 export interface FetchRuleListReq extends Partial<RuleRecord> {
-  current: number;
-  pageSize: number;
+  current?: number;
+  pageSize?: number;
 }
 
 export interface FetchRuleListRes {

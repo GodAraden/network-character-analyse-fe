@@ -142,17 +142,10 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
+  import { jsonValidator } from '@/utils/json';
   import { injectFormData } from '../hooks/useFormData';
 
   const { step, disabled, onSubmit, formData } = injectFormData();
-
-  const jsonValidator = (value: string, callback: (error?: string) => void) => {
-    try {
-      JSON.stringify(JSON.parse(value));
-    } catch (e) {
-      callback('Parsing JSON Error');
-    }
-  };
 
   const formRef = ref<FormInstance>();
 

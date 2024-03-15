@@ -1,263 +1,101 @@
 <template>
   <div class="my-container">
     <Breadcrumb :items="['menu.query', 'menu.query.start']" />
-    <a-form ref="formRef" layout="vertical" :model="formData">
-      <a-space direction="vertical" :size="16">
-        <a-card class="general-card">
-          <template #title>
-            {{ $t('query.start.title.video') }}
-          </template>
-          <a-row :gutter="80">
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.video.mode')"
-                field="video.mode"
-              >
-                <a-select
-                  :placeholder="$t('query.start.placeholder.video.mode')"
-                >
-                  <a-option value="custom">自定义</a-option>
-                  <a-option value="mode1">模式1</a-option>
-                  <a-option value="mode2">模式2</a-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="
-                  $t('query.start.form.label.video.acquisition.resolution')
-                "
-                field="video.acquisition.resolution"
-              >
-                <a-select
-                  :placeholder="
-                    $t('query.start.placeholder.video.acquisition.resolution')
-                  "
-                >
-                  <a-option value="resolution1">分辨率1</a-option>
-                  <a-option value="resolution2">分辨率2</a-option>
-                  <a-option value="resolution3">分辨率3</a-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="
-                  $t('query.start.form.label.video.acquisition.frameRate')
-                "
-                field="video.acquisition.frameRate"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.video.acquisition.frameRate')
-                  "
-                >
-                  <template #append> fps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row :gutter="80">
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.video.encoding.resolution')"
-                field="video.encoding.resolution"
-              >
-                <a-select
-                  :placeholder="
-                    $t('query.start.placeholder.video.encoding.resolution')
-                  "
-                >
-                  <a-option value="resolution1">分辨率1</a-option>
-                  <a-option value="resolution2">分辨率2</a-option>
-                  <a-option value="resolution3">分辨率3</a-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.video.encoding.rate.min')"
-                field="video.encoding.rate.min"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.video.encoding.rate.min')
-                  "
-                  add-after="bps"
-                >
-                  <template #append> bps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.video.encoding.rate.max')"
-                field="video.encoding.rate.max"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.video.encoding.rate.max')
-                  "
-                >
-                  <template #append> bps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row :gutter="80">
-            <a-col :span="8">
-              <a-form-item
-                :label="
-                  $t('query.start.form.label.video.encoding.rate.default')
-                "
-                field="video.encoding.rate.default"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.video.encoding.rate.default')
-                  "
-                >
-                  <template #append> bps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.video.encoding.frameRate')"
-                field="video.encoding.frameRate"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.video.encoding.frameRate')
-                  "
-                >
-                  <template #append> fps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.video.encoding.profile')"
-                field="video.encoding.profile"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.video.encoding.profile')
-                  "
-                >
-                  <template #append> bps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-          </a-row>
-        </a-card>
-        <a-card class="general-card">
-          <template #title>
-            {{ $t('query.start.title.audio') }}
-          </template>
-          <a-row :gutter="80">
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.audio.mode')"
-                field="audio.mode"
-              >
-                <a-select
-                  :placeholder="$t('query.start.placeholder.audio.mode')"
-                >
-                  <a-option value="custom">自定义</a-option>
-                  <a-option value="mode1">模式1</a-option>
-                  <a-option value="mode2">模式2</a-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.audio.acquisition.channels')"
-                field="audio.acquisition.channels"
-              >
-                <a-select
-                  :placeholder="
-                    $t('query.start.placeholder.audio.acquisition.channels')
-                  "
-                >
-                  <a-option value="1">1</a-option>
-                  <a-option value="2">2</a-option>
-                  <a-option value="3">3</a-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.audio.encoding.channels')"
-                field="audio.encoding.channels"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.audio.encoding.channels')
-                  "
-                >
-                  <template #append> bps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-          </a-row>
-          <a-row :gutter="80">
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.audio.encoding.rate')"
-                field="audio.encoding.rate"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.audio.encoding.rate')
-                  "
-                >
-                  <template #append> bps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-
-            <a-col :span="8">
-              <a-form-item
-                :label="$t('query.start.form.label.audio.encoding.profile')"
-                field="audio.encoding.profile"
-              >
-                <a-input
-                  :placeholder="
-                    $t('query.start.placeholder.audio.encoding.profile')
-                  "
-                >
-                  <template #append> fps </template>
-                </a-input>
-              </a-form-item>
-            </a-col>
-          </a-row>
-        </a-card>
-        <a-card class="general-card" :bordered="false">
-          <template #title>
-            {{ $t('query.start.title.description') }}
-          </template>
-          <a-form-item
-            :label="$t('query.start.form.label.parameterDescription')"
-            field="audio.approvers"
+    <a-card class="general-card">
+      <template #title>
+        {{ $t('menu.query.start') }}
+      </template>
+      <a-form ref="formRef" class="form" :disabled="loading" :model="formData">
+        <a-form-item
+          field="ruleId"
+          validate-trigger="change"
+          :label="$t('query.start.form.label.ruleId')"
+          :rules="[
+            {
+              required: true,
+              message: $t('query.start.form.error.ruleId.required'),
+            },
+          ]"
+        >
+          <a-select
+            v-model="formData.ruleId"
+            allow-search
+            :placeholder="$t('query.start.form.placeholder.ruleId')"
           >
-            <a-textarea
-              :placeholder="$t('query.start.placeholder.description')"
-            />
-          </a-form-item>
-        </a-card>
+            <a-option v-for="item in options" :key="item.id" :value="item.id">
+              {{ item.name }}
+            </a-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item
+          field="header"
+          validate-trigger="input"
+          :label="$t('query.start.form.label.header')"
+          :rules="[
+            {
+              required: true,
+              message: $t('query.start.form.error.header.required'),
+            },
+            {
+              validator: jsonValidator,
+              message: $t('query.start.form.error.header.pattern'),
+            },
+          ]"
+        >
+          <a-textarea
+            v-model="formData.header"
+            :placeholder="$t('query.start.form.placeholder.header')"
+          />
+        </a-form-item>
+        <a-form-item
+          field="params"
+          validate-trigger="input"
+          :label="$t('query.start.form.label.params')"
+          :rules="[
+            {
+              required: true,
+              message: $t('query.start.form.error.params.required'),
+            },
+            {
+              validator: jsonValidator,
+              message: $t('query.start.form.error.params.pattern'),
+            },
+          ]"
+        >
+          <a-textarea
+            v-model="formData.params"
+            :placeholder="$t('query.start.form.placeholder.params')"
+          />
+        </a-form-item>
+        <a-form-item
+          field="other"
+          validate-trigger="input"
+          :label="$t('query.start.form.label.other')"
+          :rules="[
+            {
+              validator: jsonValidator,
+              message: $t('query.start.form.error.other.pattern'),
+            },
+          ]"
+        >
+          <a-textarea
+            v-model="formData.other"
+            :placeholder="$t('query.start.form.placeholder.other')"
+          />
+        </a-form-item>
+      </a-form>
+    </a-card>
+
+    <div class="actions">
+      <a-space>
+        <a-button>
+          {{ $t('query.start.reset') }}
+        </a-button>
+        <a-button type="primary" :loading="loading" @click="onSubmitClick">
+          {{ $t('query.start.submit') }}
+        </a-button>
       </a-space>
-      <div class="actions">
-        <a-space>
-          <a-button>
-            {{ $t('query.start.reset') }}
-          </a-button>
-          <a-button type="primary" :loading="loading" @click="onSubmitClick">
-            {{ $t('query.start.submit') }}
-          </a-button>
-        </a-space>
-      </div>
-    </a-form>
+    </div>
   </div>
 </template>
 
@@ -265,19 +103,49 @@
   import { ref } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import useLoading from '@/hooks/loading';
+  import { StartQueryReq, startQuery } from '@/api/query';
+  import { jsonValidator } from '@/utils/json';
+  import { RuleRecord, fetchRuleList } from '@/api/rule';
+  import { Message } from '@arco-design/web-vue';
+  import { useI18n } from 'vue-i18n';
+  import { useRouter } from 'vue-router';
 
-  const formData = ref({});
+  const { t } = useI18n();
+  const router = useRouter();
+
+  const formData = ref<StartQueryReq>({} as StartQueryReq);
   const formRef = ref<FormInstance>();
+  const options = ref<RuleRecord[]>([]);
   const { loading, setLoading } = useLoading();
+
   const onSubmitClick = async () => {
     const res = await formRef.value?.validate();
     if (!res) {
       setLoading(true);
+      try {
+        const { id } = await startQuery(formData.value);
+        if (id) {
+          Message.success(t('query.start.submitSuccess', { id }));
+          setTimeout(() => router.push({ name: 'QueryManagement' }), 3000);
+        }
+      } catch (error) {
+        //
+      } finally {
+        setLoading(false);
+      }
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
   };
+
+  const bootstrap = async () => {
+    try {
+      const { data } = await fetchRuleList({});
+      options.value = data.list;
+    } catch (error) {
+      //
+    }
+  };
+
+  bootstrap();
 </script>
 
 <script lang="ts">
@@ -301,5 +169,10 @@
     padding: 14px 20px 14px 0;
     background: var(--color-bg-2);
     text-align: right;
+  }
+
+  .form {
+    width: 600px;
+    margin: 16px auto 32px;
   }
 </style>
