@@ -1,50 +1,50 @@
 import axios from 'axios';
 import qs from 'query-string';
-import type { DescData } from '@arco-design/web-vue/es/descriptions/interface';
 
 export interface BaseInfoModel {
-  activityName: string;
-  channelType: string;
-  promotionTime: string[];
-  promoteLink: string;
-}
-export interface ChannelInfoModel {
-  advertisingSource: string;
-  advertisingMedia: string;
-  keyword: string[];
-  pushNotify: boolean;
-  advertisingContent: string;
-}
-
-export type UnitChannelModel = BaseInfoModel & ChannelInfoModel;
-
-export function submitChannelForm(data: UnitChannelModel) {
-  return axios.post('/api/channel-form/submit', { data });
-}
-
-export interface PolicyRecord {
-  id: string;
-  number: number;
   name: string;
-  contentType: 'img' | 'horizontalVideo' | 'verticalVideo';
-  filterType: 'artificial' | 'rules';
-  count: number;
-  status: 'online' | 'offline';
-  createdTime: string;
+  base: string;
+  depth: number;
 }
 
-export interface PolicyParams extends Partial<PolicyRecord> {
+export interface RuleItem {
+  name: string;
+  order: number;
+  path: string;
+  resolve: string;
+  parameter: string;
+}
+
+export type RuleRecord = BaseInfoModel & { id: string; rules: RuleItem[] };
+
+export type CreateRuleReq = BaseInfoModel & { rules: RuleItem[] };
+export type CreateRuleRes = { id: string };
+
+export async function createRule(params: CreateRuleReq) {
+  const { data } = await axios.post<CreateRuleRes>('/api/rule/create', params);
+  return data;
+}
+
+export type UpdateRuleReq = Partial<RuleRecord>;
+export type UpdateRuleRes = boolean;
+
+export async function updateRule(params: UpdateRuleReq) {
+  const { data } = await axios.post<UpdateRuleRes>('/api/rule/update', params);
+  return data;
+}
+
+export interface FetchRuleListReq extends Partial<RuleRecord> {
   current: number;
   pageSize: number;
 }
 
-export interface PolicyListRes {
-  list: PolicyRecord[];
+export interface FetchRuleListRes {
+  list: RuleRecord[];
   total: number;
 }
 
-export function queryPolicyList(params: PolicyParams) {
-  return axios.get<PolicyListRes>('/api/list/policy', {
+export function fetchRuleList(params: FetchRuleListReq) {
+  return axios.get<FetchRuleListRes>('/api/rule/list', {
     params,
     paramsSerializer: (obj) => {
       return qs.stringify(obj);
@@ -52,25 +52,17 @@ export function queryPolicyList(params: PolicyParams) {
   });
 }
 
-export interface ServiceRecord {
-  id: number;
-  title: string;
-  description: string;
-  name?: string;
-  actionType?: string;
-  icon?: string;
-  data?: DescData[];
-  enable?: boolean;
-  expires?: boolean;
-}
-export function queryInspectionList() {
-  return axios.get('/api/list/quality-inspection');
+export interface FetchRuleInfoReq {
+  id: string;
 }
 
-export function queryTheServiceList() {
-  return axios.get('/api/list/the-service');
-}
+export type FetchRuleInfoRes = RuleRecord;
 
-export function queryRulesPresetList() {
-  return axios.get('/api/list/rules-preset');
+export function fetchRuleInfo(params: FetchRuleInfoReq) {
+  return axios.get<FetchRuleInfoRes>('/api/rule/info', {
+    params,
+    paramsSerializer: (obj) => {
+      return qs.stringify(obj);
+    },
+  });
 }

@@ -1,64 +1,65 @@
 export default {
-  'menu.rule.editor': 'Rule Editor',
-  'rule.editor.step.title': 'Create channel form',
-  'rule.editor.step.title.baseInfo': 'Select basic information',
-  'rule.editor.step.subTitle.baseInfo': 'Create channel activity',
-  'rule.editor.step.title.channel': 'Enter channel information',
-  'rule.editor.step.subTitle.channel': 'Enter detailed channel information',
-  'rule.editor.step.title.finish': 'Complete creation',
-  'rule.editor.step.subTitle.finish': 'Created successfully',
-  'rule.editor.success.title': 'Submission successful',
-  'rule.editor.success.subTitle': 'The form was submitted successfully! ',
-  'rule.editor.button.next': 'Next',
+  'menu.rule.editor': 'rule edit',
+  'rule.editor.step.title.create': 'Create rule',
+  'rule.editor.step.title.update': 'edit rule',
+  'rule.editor.step.title.view': 'view rule',
+  'rule.editor.step.title.baseInfo':
+    'Fill in the basic information of the rule',
+  'rule.editor.step.subTitle.baseInfo':
+    'A rule defines a way to crawl data for a particular content platform',
+  'rule.editor.step.title.channel': 'refine rule item',
+  'rule.editor.step.subTitle.channel':
+    'A rule contains multiple sequential rule items that define the API to be requested, the request parameters, and how the response is parsed',
+  'rule.editor.step.title.finish': 'finish editing',
+  'rule.editor.step.subTitle.finish': 'Rule edited successfully',
+  'rule.editor.create.success.title': 'created successful',
+  'rule.editor.create.success.subTitle': 'Rule created~',
+  'rule.editor.update.success.title': 'Edit successful',
+  'rule.editor.update.success.subTitle': 'Rule edited~',
+  'rule.editor.button.next': 'next',
   'rule.editor.button.prev': 'Previous',
-  'rule.editor.button.submit': 'Submit',
-  'rule.editor.button.again': 'Create again',
+  'rule.editor.button.submit': 'submit',
+  'rule.editor.button.again': 'create again',
   'rule.editor.button.view': 'View details',
-  'rule.editor.form.label.activityName': 'Activity name',
-  'rule.editor.placeholder.activityName':
-    'Enter Chinese characters, letters or numbers, up to 20 characters',
-  'rule.editor.form.error.activityName.required':
-    'Please enter the activity name',
-  'rule.editor.form.error.activityName.pattern':
-    'Enter Chinese characters, letters or numbers, up to 20 characters',
-  'rule.editor.form.label.channelType': 'Channel Type',
-  'rule.editor.placeholder.channelType': 'Please select the channel type',
-  'rule.editor.form.error.channelType.required':
-    'Please select the channel type',
-  'rule.editor.form.label.promotionTime': 'Promotion time',
-  'rule.editor.form.error.promotionTime.required':
-    'Please select promotion time',
-  'rule.editor.form.label.promoteLink': 'Promotion address',
-  'rule.editor.form.error.promoteLink.required':
-    'Please enter the promotion address',
-  'rule.editor.form.error.promoteLink.pattern':
-    'Such as Android or iOS download address, intermediate jump URL, the URL must start with http:// or https://',
-  'rule.editor.form.tip.promoteLink':
-    'Such as Android or iOS download address, intermediate jump URL, the URL must start with http:// or https://',
-  'rule.editor.placeholder.promoteLink':
-    'Please enter the promotion page address',
-  'rule.editor.form.label.advertisingSource': 'Advertising Source',
-  'rule.editor.placeholder.advertisingSource':
-    'Referral source address: sohu, sina',
-  'rule.editor.form.error.advertisingSource.required':
-    'Please enter the advertising source',
-  'rule.editor.form.label.advertisingMedia': 'Advertising Media',
-  'rule.editor.placeholder.advertisingMedia':
-    'Marketing media: cpc, banner, edm',
-  'rule.editor.form.error.advertisingMedia.required':
-    'Please enter advertising media',
-  'rule.editor.form.label.keyword': 'Keyword',
-  'rule.editor.placeholder.keyword': 'Please select a keyword',
-  'rule.editor.form.error.keyword.required': 'Please select a keyword',
-  'rule.editor.form.label.pushNotify': 'Push reminder',
-  'rule.editor.form.label.advertisingContent': 'Advertising content',
-  'rule.editor.placeholder.advertisingContent':
-    'Please enter an introduction to the advertisement content, no more than 200 words. ',
-  'rule.editor.form.error.advertisingContent.required':
-    'Please enter advertising content',
-  'rule.editor.form.error.advertisingContent.maxLength':
-    'No more than 200 words',
-  'rule.editor.form.description.title': 'Channel form description',
-  'rule.editor.form.description.text':
-    'Advertiser channel promotion supports tracking of users who download Apps by placing ads on third-party advertisers, such as placing App download ads on Toutiao channels and tracking users who activate Apps by downloading through channels. ',
+
+  'rule.editor.basic.label.name': 'Rule Name',
+  'rule.editor.basic.placeholder.name': 'Up to 20 characters',
+  'rule.editor.basic.error.name.required': 'Please enter a rule name',
+  'rule.editor.basic.error.name.pattern': 'maximum 20 characters',
+  'rule.editor.basic.label.base': 'BaseURL',
+  'rule.editor.basic.placeholder.base':
+    'protocol + domain name, e.g. https://www.baidu.com/',
+  'rule.editor.basic.error.base.required': 'Please enter BaseURL',
+  'rule.editor.basic.error.base.pattern': 'Please enter a valid URL',
+  'rule.editor.basic.label.depth': 'crawl depth',
+  'rule.editor.basic.error.depth.required':
+    'Please enter crawl depth, positive integers 1, 2, 3 are currently supported',
+
+  'rule.editor.rules.label.name': 'Rule item name',
+  'rule.editor.rules.placeholder.name':
+    'Enter Chinese characters, letters, or numbers, up to 20 characters',
+  'rule.editor.rules.error.name.required': 'Please enter a rule item name',
+  'rule.editor.rules.error.name.pattern':
+    'Please enter Chinese characters, letters, or numbers, up to 20 characters',
+  'rule.editor.rules.label.path': 'API path',
+  'rule.editor.rules.placeholder.path':
+    'The part after the domain name, e.g. /api/v1/search',
+  'rule.editor.rules.error.path.required': 'Please enter API path',
+  'rule.editor.rules.error.path.pattern': 'Please enter the correct API path',
+  'rule.editor.rules.label.parameter': 'parameter rules',
+  'rule.editor.rules.placeholder.parameter':
+    'JSON format, restricting the content of the request parameters, such as Query, Params, Body',
+  'rule.editor.rules.error.parameter.required': 'Please enter a parameter rule',
+  'rule.editor.rules.error.parameter.pattern':
+    'Please enter the correct parameter rule',
+  'rule.editor.rules.label.resolve': 'response parsing rule',
+  'rule.editor.rules.error.resolve.required':
+    'Please enter a response parsing rule',
+  'rule.editor.rules.error.resolve.pattern':
+    'Please enter the correct response parsing rule',
+  'rule.editor.rules.placeholder.resolve':
+    'JSON format, the response will be parsed according to this rule',
+  'rule.editor.rules.label.order': 'rule item order',
+  'rule.editor.rules.error.order.required':
+    'Please enter the order of rule items',
 };
