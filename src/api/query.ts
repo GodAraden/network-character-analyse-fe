@@ -127,11 +127,14 @@ export function queryRulesPresetList() {
   return axios.get('/api/list/rules-preset');
 }
 
+// -------------
+
 export interface StartQueryReq {
   ruleId: string;
+  name: string;
   header: string;
   params: string;
-  other: string;
+  other?: string;
 }
 export interface StartQueryRes {
   id: string;
@@ -139,5 +142,31 @@ export interface StartQueryRes {
 
 export async function startQuery(params: StartQueryReq) {
   const { data } = await axios.post<StartQueryRes>('/api/query/start', params);
+  return data;
+}
+
+export interface Query {
+  id: string;
+  name: string;
+  ruleId: string;
+  network: string;
+  analyse: string;
+  createdAt: string;
+  operator: string;
+  status: number;
+}
+
+export interface FetchQueryListReq extends Partial<Query> {
+  current?: number;
+  pageSize?: number;
+}
+
+export interface FetchQueryListRes {
+  list: Query[];
+  total: number;
+}
+
+export async function fetchQueryList(params: FetchQueryListReq) {
+  const { data } = await axios.post('/api/query/list', params);
   return data;
 }

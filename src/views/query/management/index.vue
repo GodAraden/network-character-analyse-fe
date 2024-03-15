@@ -12,15 +12,10 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item
-                  field="number"
-                  :label="$t('query.management.form.number')"
-                >
+                <a-form-item field="id" :label="$t('query.management.form.id')">
                   <a-input
-                    v-model="formModel.number"
-                    :placeholder="
-                      $t('query.management.form.number.placeholder')
-                    "
+                    v-model="formModel.id"
+                    :placeholder="$t('query.management.form.id.placeholder')"
                   />
                 </a-form-item>
               </a-col>
@@ -37,35 +32,47 @@
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="contentType"
-                  :label="$t('query.management.form.contentType')"
+                  field="ruleId"
+                  :label="$t('query.management.form.ruleId')"
                 >
                   <a-select
-                    v-model="formModel.contentType"
-                    :options="contentTypeOptions"
+                    v-model="formModel.ruleId"
+                    allow-search
+                    :options="
+                      rules.map((rule) => ({
+                        label: rule.name,
+                        value: rule.id,
+                      }))
+                    "
                     :placeholder="$t('query.management.form.selectDefault')"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="filterType"
-                  :label="$t('query.management.form.filterType')"
+                  field="operator"
+                  :label="$t('query.management.form.operator')"
                 >
                   <a-select
-                    v-model="formModel.filterType"
-                    :options="filterTypeOptions"
+                    v-model="formModel.operator"
+                    allow-search
+                    :options="
+                      users.map((user) => ({
+                        label: showUser(user),
+                        value: user.id,
+                      }))
+                    "
                     :placeholder="$t('query.management.form.selectDefault')"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="createdTime"
-                  :label="$t('query.management.form.createdTime')"
+                  field="createdAt"
+                  :label="$t('query.management.form.createdAt')"
                 >
                   <a-range-picker
-                    v-model="formModel.createdTime"
+                    v-model="formModel.createdAt"
                     style="width: 100%"
                   />
                 </a-form-item>
@@ -103,91 +110,6 @@
           </a-space>
         </a-col>
       </a-row>
-      <a-divider style="margin-top: 0" />
-      <a-row style="margin-bottom: 16px">
-        <a-col :span="12">
-          <a-space>
-            <a-button type="primary">
-              <template #icon>
-                <icon-plus />
-              </template>
-              {{ $t('query.management.operation.create') }}
-            </a-button>
-            <a-upload action="/">
-              <template #upload-button>
-                <a-button>
-                  {{ $t('query.management.operation.import') }}
-                </a-button>
-              </template>
-            </a-upload>
-          </a-space>
-        </a-col>
-        <a-col
-          :span="12"
-          style="display: flex; align-items: center; justify-content: end"
-        >
-          <a-button>
-            <template #icon>
-              <icon-download />
-            </template>
-            {{ $t('query.management.operation.download') }}
-          </a-button>
-          <a-tooltip :content="$t('query.management.actions.refresh')">
-            <div class="action-icon" @click="search"
-              ><icon-refresh size="18"
-            /></div>
-          </a-tooltip>
-          <a-dropdown @select="handleSelectDensity">
-            <a-tooltip :content="$t('query.management.actions.density')">
-              <div class="action-icon"><icon-line-height size="18" /></div>
-            </a-tooltip>
-            <template #content>
-              <a-doption
-                v-for="item in densityList"
-                :key="item.value"
-                :value="item.value"
-                :class="{ active: item.value === size }"
-              >
-                <span>{{ item.name }}</span>
-              </a-doption>
-            </template>
-          </a-dropdown>
-          <a-tooltip :content="$t('query.management.actions.columnSetting')">
-            <a-popover
-              trigger="click"
-              position="bl"
-              @popup-visible-change="popupVisibleChange"
-            >
-              <div class="action-icon"><icon-settings size="18" /></div>
-              <template #content>
-                <div id="tableSetting">
-                  <div
-                    v-for="(item, index) in showColumns"
-                    :key="item.dataIndex"
-                    class="setting"
-                  >
-                    <div style="margin-right: 4px; cursor: move">
-                      <icon-drag-arrow />
-                    </div>
-                    <div>
-                      <a-checkbox
-                        v-model="item.checked"
-                        @change="
-                          handleChange($event, item as TableColumnData, index)
-                        "
-                      >
-                      </a-checkbox>
-                    </div>
-                    <div class="title">
-                      {{ item.title === '#' ? '序列号' : item.title }}
-                    </div>
-                  </div>
-                </div>
-              </template>
-            </a-popover>
-          </a-tooltip>
-        </a-col>
-      </a-row>
       <a-table
         row-key="id"
         :loading="loading"
@@ -195,53 +117,73 @@
         :columns="(cloneColumns as TableColumnData[])"
         :data="renderData"
         :bordered="false"
-        :size="size"
         @page-change="onPageChange"
       >
         <template #index="{ rowIndex }">
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
         </template>
-        <template #contentType="{ record }">
-          <a-space>
-            <a-avatar
-              v-if="record.contentType === 'img'"
-              :size="16"
-              shape="square"
-            >
-              <img
-                alt="avatar"
-                src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image"
-              />
-            </a-avatar>
-            <a-avatar
-              v-else-if="record.contentType === 'horizontalVideo'"
-              :size="16"
-              shape="square"
-            >
-              <img
-                alt="avatar"
-                src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77721e365eb2ab786c889682cbc721c1.svg~tplv-49unhts6dw-image.image"
-              />
-            </a-avatar>
-            <a-avatar v-else :size="16" shape="square">
-              <img
-                alt="avatar"
-                src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image"
-              />
-            </a-avatar>
-            {{ $t(`query.management.form.contentType.${record.contentType}`) }}
-          </a-space>
+        <template #createdAt="{ record }">
+          {{ new Date(record.createdAt).toLocaleString() }}
         </template>
-        <template #filterType="{ record }">
-          {{ $t(`query.management.form.filterType.${record.filterType}`) }}
+        <template #ruleId="{ record }">
+          <a-button
+            type="text"
+            size="small"
+            @click="
+              () =>
+                $router.push({
+                  name: 'RuleEditor',
+                  query: { mode: 'view', id: record.ruleId },
+                })
+            "
+          >
+            {{
+              rules.find((item) => item.id === record.ruleId)?.name ||
+              `规则${Math.floor(Math.random() * 90 + 10)}`
+            }}
+          </a-button>
+        </template>
+        <template #operator="{ record }">
+          {{
+            showUser(
+              users.find((user) => user.id === record.ruleId) || {
+                nickname: `用户${Math.floor(Math.random() * 90 + 10)}`,
+                username: `zhangsan${Math.floor(Math.random() * 90 + 10)}`,
+              }
+            )
+          }}
         </template>
         <template #status="{ record }">
-          <span v-if="record.status === 'offline'" class="circle"></span>
-          <span v-else class="circle pass"></span>
-          {{ $t(`query.management.form.status.${record.status}`) }}
+          <a-typography-text
+            :type="
+              record.status === 1
+                ? 'success'
+                : record.status === -1
+                ? 'danger'
+                : 'secondary'
+            "
+          >
+            <icon-loading v-if="record.status === 0" />
+            <icon-close v-else-if="record.status === -1" />
+            <icon-check v-else-if="record.status === 1" />
+            {{ $t(`query.management.form.status.${record.status}`) }}
+          </a-typography-text>
         </template>
-        <template #operations>
-          <a-button v-permission="['admin']" type="text" size="small">
+        <template #operations="{ record }">
+          <a-button
+            :disabled="record.status !== 1"
+            type="text"
+            size="small"
+            @click="
+              () =>
+                $router.push({
+                  name: 'QueryResult',
+                  query: {
+                    id: record.id,
+                  },
+                })
+            "
+          >
             {{ $t('query.management.columns.operations.view') }}
           </a-button>
         </template>
@@ -251,26 +193,27 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, reactive, watch, nextTick } from 'vue';
+  import { computed, ref, reactive, watch } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import { queryPolicyList, PolicyRecord, PolicyParams } from '@/api/query';
+  import { fetchQueryList, PolicyRecord, FetchQueryListReq } from '@/api/query';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
-  import Sortable from 'sortablejs';
+  import { RuleRecord, fetchRuleList } from '@/api/rule';
+  import { User, queryUserList } from '@/api/user-management';
+  import { showUser } from '@/utils/transformer';
 
-  type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
 
   const generateFormModel = () => {
     return {
-      number: '',
+      id: '',
       name: '',
-      contentType: '',
-      filterType: '',
-      createdTime: [],
+      ruleId: '',
+      operator: '',
+      createdAt: [],
       status: '',
     };
   };
@@ -281,8 +224,6 @@
   const cloneColumns = ref<Column[]>([]);
   const showColumns = ref<Column[]>([]);
 
-  const size = ref<SizeProps>('medium');
-
   const basePagination: Pagination = {
     current: 1,
     pageSize: 20,
@@ -290,24 +231,6 @@
   const pagination = reactive({
     ...basePagination,
   });
-  const densityList = computed(() => [
-    {
-      name: t('query.management.size.mini'),
-      value: 'mini',
-    },
-    {
-      name: t('query.management.size.small'),
-      value: 'small',
-    },
-    {
-      name: t('query.management.size.medium'),
-      value: 'medium',
-    },
-    {
-      name: t('query.management.size.large'),
-      value: 'large',
-    },
-  ]);
   const columns = computed<TableColumnData[]>(() => [
     {
       title: t('query.management.columns.index'),
@@ -315,29 +238,27 @@
       slotName: 'index',
     },
     {
-      title: t('query.management.columns.number'),
-      dataIndex: 'number',
+      title: t('query.management.columns.id'),
+      dataIndex: 'id',
     },
     {
       title: t('query.management.columns.name'),
       dataIndex: 'name',
     },
     {
-      title: t('query.management.columns.contentType'),
-      dataIndex: 'contentType',
-      slotName: 'contentType',
+      title: t('query.management.columns.ruleId'),
+      dataIndex: 'ruleId',
+      slotName: 'ruleId',
     },
     {
-      title: t('query.management.columns.filterType'),
-      dataIndex: 'filterType',
+      title: t('query.management.columns.operator'),
+      dataIndex: 'operator',
+      slotName: 'operator',
     },
     {
-      title: t('query.management.columns.count'),
-      dataIndex: 'count',
-    },
-    {
-      title: t('query.management.columns.createdTime'),
-      dataIndex: 'createdTime',
+      title: t('query.management.columns.createdAt'),
+      dataIndex: 'createdAt',
+      slotName: 'createdAt',
     },
     {
       title: t('query.management.columns.status'),
@@ -346,52 +267,23 @@
     },
     {
       title: t('query.management.columns.operations'),
-      dataIndex: 'operations',
       slotName: 'operations',
     },
   ]);
-  const contentTypeOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('query.management.form.contentType.img'),
-      value: 'img',
-    },
-    {
-      label: t('query.management.form.contentType.horizontalVideo'),
-      value: 'horizontalVideo',
-    },
-    {
-      label: t('query.management.form.contentType.verticalVideo'),
-      value: 'verticalVideo',
-    },
-  ]);
-  const filterTypeOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('query.management.form.filterType.artificial'),
-      value: 'artificial',
-    },
-    {
-      label: t('query.management.form.filterType.rules'),
-      value: 'rules',
-    },
-  ]);
-  const statusOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('query.management.form.status.online'),
-      value: 'online',
-    },
-    {
-      label: t('query.management.form.status.offline'),
-      value: 'offline',
-    },
-  ]);
+  const statusOptions = computed<SelectOptionData[]>(() =>
+    [-1, 0, 1].map((status) => ({
+      label: t(`query.management.form.status.${status}`),
+      value: status,
+    }))
+  );
   const fetchData = async (
-    params: PolicyParams = { current: 1, pageSize: 20 }
+    params: FetchQueryListReq = { current: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
-      const { data } = await queryPolicyList(params);
+      const data = await fetchQueryList(params);
       renderData.value = data.list;
-      pagination.current = params.current;
+      pagination.current = params.current || 1;
       pagination.total = data.total;
     } catch (err) {
       // you can report use errorHandler or other
@@ -404,7 +296,7 @@
     fetchData({
       ...basePagination,
       ...formModel.value,
-    } as unknown as PolicyParams);
+    } as unknown as FetchQueryListReq);
   };
   const onPageChange = (current: number) => {
     fetchData({ ...basePagination, current });
@@ -415,59 +307,25 @@
     formModel.value = generateFormModel();
   };
 
-  const handleSelectDensity = (
-    val: string | number | Record<string, any> | undefined,
-    e: Event
-  ) => {
-    size.value = val as SizeProps;
-  };
+  const rules = ref<RuleRecord[]>([]);
+  const users = ref<User[]>([]);
+  const bootstrap = async () => {
+    try {
+      const { data } = await fetchRuleList({});
+      rules.value = data.list;
+    } catch (error) {
+      //
+    }
 
-  const handleChange = (
-    checked: boolean | (string | boolean | number)[],
-    column: Column,
-    index: number
-  ) => {
-    if (!checked) {
-      cloneColumns.value = showColumns.value.filter(
-        (item) => item.dataIndex !== column.dataIndex
-      );
-    } else {
-      cloneColumns.value.splice(index, 0, column);
+    try {
+      const { data } = await queryUserList({});
+      users.value = data.list;
+    } catch (error) {
+      //
     }
   };
 
-  const exchangeArray = <T extends Array<any>>(
-    array: T,
-    beforeIdx: number,
-    newIdx: number,
-    isDeep = false
-  ): T => {
-    const newArray = isDeep ? cloneDeep(array) : array;
-    if (beforeIdx > -1 && newIdx > -1) {
-      // 先替换后面的，然后拿到替换的结果替换前面的
-      newArray.splice(
-        beforeIdx,
-        1,
-        newArray.splice(newIdx, 1, newArray[beforeIdx]).pop()
-      );
-    }
-    return newArray;
-  };
-
-  const popupVisibleChange = (val: boolean) => {
-    if (val) {
-      nextTick(() => {
-        const el = document.getElementById('tableSetting') as HTMLElement;
-        const sortable = new Sortable(el, {
-          onEnd(e: any) {
-            const { oldIndex, newIndex } = e;
-            exchangeArray(cloneColumns.value, oldIndex, newIndex);
-            exchangeArray(showColumns.value, oldIndex, newIndex);
-          },
-        });
-      });
-    }
-  };
+  bootstrap();
 
   watch(
     () => columns.value,

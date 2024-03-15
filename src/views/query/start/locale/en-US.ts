@@ -3,7 +3,12 @@ export default {
   'query.start.form.label.ruleId': 'Rule',
   'query.start.form.placeholder.ruleId': 'Please select rule',
   'query.start.form.error.ruleId.required': 'Please select rule',
-  'query.start.form.error.ruleId.pattern': '',
+  'query.start.form.label.name': 'Name',
+  'query.start.form.placeholder.name': 'Up to 20 characters',
+  'query.start.form.error.name.required': 'Please enter a name',
+  'query.start.form.error.name.pattern':
+    'Please enter Chinese characters, letters, or numbers, up to 20 characters',
+
   'query.start.form.label.header': 'Header',
   'query.start.form.placeholder.header':
     'JSON format. Apply to all requests in this round of queries',

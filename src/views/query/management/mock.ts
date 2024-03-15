@@ -5,24 +5,48 @@ import { GetParams } from '@/types/global';
 
 const { Random } = Mock;
 
+const usernames = [];
+
+for (let i = 0; i < 20; i += 1) {
+  // 假设这里有一些中文姓名的拼音
+  const chineseNames = [
+    'zhangsan',
+    'lisi',
+    'wangwu',
+    'zhaoliu',
+    'qianqi',
+    'sunba',
+    'zhoujiu',
+    'wushi',
+    'zhengshi',
+    'faner',
+  ];
+  const randomName =
+    chineseNames[Math.floor(Math.random() * chineseNames.length)];
+  const randomNumber = Math.floor(Math.random() * 90) + 10;
+  const combinedString = `${randomName}${randomNumber}`;
+  usernames.push(combinedString);
+}
+
 const data = Mock.mock({
   'list|55': [
     {
-      'id|8': /[A-Z][a-z][-][0-9]/,
-      'number|2-3': /[0-9]/,
-      'name|4-8': /[A-Z]/,
-      'contentType|1': ['img', 'horizontalVideo', 'verticalVideo'],
-      'count|2-3': /[0-9]/,
-      'status|1': ['online', 'offline'],
-      'filterType|1': ['artificial', 'rules'],
-      'createdTime': Random.datetime(),
+      'id': /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
+      'ruleId':
+        /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
+      'name': /^查询\d{3}$/,
+      'network': '',
+      'analyse': '',
+      'createdAt': +new Date(Random.date()),
+      'operator|1': usernames,
+      'status|1': [-1, 0, 1],
     },
   ],
 });
 
 setupMock({
   setup() {
-    Mock.mock(new RegExp('/api/list/policy'), (params: GetParams) => {
+    Mock.mock(new RegExp('/api/query/list'), (params: GetParams) => {
       const { current = 1, pageSize = 10 } = qs.parseUrl(params.url).query;
       const p = current as number;
       const ps = pageSize as number;

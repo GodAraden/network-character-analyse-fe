@@ -28,6 +28,26 @@
           </a-select>
         </a-form-item>
         <a-form-item
+          field="name"
+          validate-trigger="input"
+          :label="$t('query.start.form.label.name')"
+          :rules="[
+            {
+              required: true,
+              message: $t('query.start.form.error.name.required'),
+            },
+            {
+              match: /^[a-zA-Z0-9\u4e00-\u9fa5]{1,20}$/,
+              message: $t('query.start.form.error.name.pattern'),
+            },
+          ]"
+        >
+          <a-input
+            v-model="formData.name"
+            :placeholder="$t('query.start.form.placeholder.name')"
+          />
+        </a-form-item>
+        <a-form-item
           field="header"
           validate-trigger="input"
           :label="$t('query.start.form.label.header')"
@@ -88,7 +108,7 @@
 
     <div class="actions">
       <a-space>
-        <a-button>
+        <a-button @click="() => (formData = {} as StartQueryReq)">
           {{ $t('query.start.reset') }}
         </a-button>
         <a-button type="primary" :loading="loading" @click="onSubmitClick">

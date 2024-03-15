@@ -4,7 +4,7 @@ import { UserRole, UserStatus } from '@/store/modules/user/types';
 
 export interface User {
   id: string;
-  usernames: string;
+  username: string;
   nickname: string;
   role: UserRole;
   email: string;
@@ -13,8 +13,8 @@ export interface User {
 }
 
 export interface QueryUserListReq extends Partial<User> {
-  current: number;
-  pageSize: number;
+  current?: number;
+  pageSize?: number;
 }
 
 export interface QueryUserListRes {

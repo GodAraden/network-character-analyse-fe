@@ -3,7 +3,10 @@ export default {
   'query.start.form.label.ruleId': '规则',
   'query.start.form.placeholder.ruleId': '请选择规则',
   'query.start.form.error.ruleId.required': '请选择规则',
-  'query.start.form.error.ruleId.pattern': '',
+  'query.start.form.label.name': '名称',
+  'query.start.form.placeholder.name': '输入汉字、字母或数字，最多20字符',
+  'query.start.form.error.name.required': '请输入规则项名称',
+  'query.start.form.error.name.pattern': '请输入汉字、字母或数字，最多20字符',
   'query.start.form.label.header': '请求头',
   'query.start.form.placeholder.header':
     'JSON 格式。作用于所有本轮查询中所有的请求',
