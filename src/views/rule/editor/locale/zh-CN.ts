@@ -3,10 +3,10 @@ export default {
   'rule.editor.step.title.create': '创建规则',
   'rule.editor.step.title.update': '编辑规则',
   'rule.editor.step.title.view': '查看规则',
-  'rule.editor.step.title.baseInfo': '填写规则基本信息',
+  'rule.editor.step.title.baseInfo': '规则基本信息',
   'rule.editor.step.subTitle.baseInfo':
     '规则定义了特定内容平台的一种数据爬取方式',
-  'rule.editor.step.title.channel': '完善规则项',
+  'rule.editor.step.title.channel': '规则项配置',
   'rule.editor.step.subTitle.channel':
     '一条规则包含多条按序执行的规则项，规则项定义了要请求的 API、请求参数以及响应解析方式',
   'rule.editor.step.title.finish': '完成编辑',

@@ -1,4 +1,3 @@
-import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 
 import localeWorkspace from '@/views/workspace/locale/zh-CN';
@@ -27,8 +26,10 @@ export default {
   'menu.arcoWebsite': 'Arco Design',
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
+  'messageBox.switchRoles': '切换角色',
+  'messageBox.userCenter': '用户中心',
+  'messageBox.logout': '登出登录',
   ...localeSettings,
-  ...localeMessageBox,
   ...localeLogin,
   ...localeWorkspace,
 

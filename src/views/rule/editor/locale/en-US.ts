@@ -3,11 +3,10 @@ export default {
   'rule.editor.step.title.create': 'Create rule',
   'rule.editor.step.title.update': 'edit rule',
   'rule.editor.step.title.view': 'view rule',
-  'rule.editor.step.title.baseInfo':
-    'Fill in the basic information of the rule',
+  'rule.editor.step.title.baseInfo': 'Basic information of the rule',
   'rule.editor.step.subTitle.baseInfo':
     'A rule defines a way to crawl data for a particular content platform',
-  'rule.editor.step.title.channel': 'refine rule item',
+  'rule.editor.step.title.channel': 'refine rule item config',
   'rule.editor.step.subTitle.channel':
     'A rule contains multiple sequential rule items that define the API to be requested, the request parameters, and how the response is parsed',
   'rule.editor.step.title.finish': 'finish editing',

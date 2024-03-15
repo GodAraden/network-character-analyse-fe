@@ -4,7 +4,7 @@
     <a-spin :loading="loading" style="width: 100%">
       <a-card class="general-card">
         <template #title>
-          {{ $t('rule.editor.step.title.create') }}
+          {{ $t(`rule.editor.step.title.${mode}`) }}
         </template>
         <div class="wrapper">
           <a-steps
@@ -40,7 +40,7 @@
   import Success from './components/success.vue';
   import { provideFormData } from './hooks/useFormData';
 
-  const { step, loading } = provideFormData();
+  const { step, mode, loading } = provideFormData();
 </script>
 
 <script lang="ts">

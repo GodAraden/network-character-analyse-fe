@@ -86,7 +86,7 @@
             },
           ]"
         >
-          <a-input
+          <a-textarea
             v-model="item.parameter"
             :placeholder="$t('rule.editor.rules.placeholder.parameter')"
           />
@@ -106,7 +106,7 @@
             },
           ]"
         >
-          <a-input
+          <a-textarea
             v-model="item.resolve"
             :placeholder="$t('rule.editor.rules.placeholder.resolve')"
           />
@@ -134,7 +134,7 @@
       {{ $t('rule.editor.button.prev') }}
     </a-button>
     <a-button type="primary" :disabled="disabled" @click="onNextClick">
-      {{ $t('rule.editor.button.next') }}
+      {{ $t('rule.editor.button.submit') }}
     </a-button>
   </a-space>
 </template>

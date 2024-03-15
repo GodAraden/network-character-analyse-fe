@@ -1,4 +1,3 @@
-import localeMessageBox from '@/components/message-box/locale/en-US';
 import localeLogin from '@/views/login/locale/en-US';
 
 import localeWorkspace from '@/views/workspace/locale/en-US';
@@ -27,8 +26,10 @@ export default {
   'menu.arcoWebsite': 'Arco Design',
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
+  'messageBox.switchRoles': 'Switch Roles',
+  'messageBox.userCenter': 'User Center',
+  'messageBox.logout': 'Logout',
   ...localeSettings,
-  ...localeMessageBox,
   ...localeLogin,
   ...localeWorkspace,
 
