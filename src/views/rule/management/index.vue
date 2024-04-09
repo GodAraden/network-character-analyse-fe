@@ -225,7 +225,7 @@
     try {
       const { data } = await fetchRuleList(params);
       renderData.value = data.list;
-      pagination.current = params.current;
+      pagination.current = params.current || 1;
       pagination.total = data.total;
     } catch (err) {
       // you can report use errorHandler or other

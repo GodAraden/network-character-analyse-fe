@@ -1,6 +1,8 @@
-import { mergeConfig } from 'vite';
+import { mergeConfig, loadEnv } from 'vite';
 import eslint from 'vite-plugin-eslint';
 import baseConfig from './vite.config.base';
+
+const envs = loadEnv(process.env.NODE_ENV || 'development', '');
 
 export default mergeConfig(
   {
@@ -9,6 +11,13 @@ export default mergeConfig(
       open: true,
       fs: {
         strict: true,
+      },
+      proxy: {
+        '^/api': {
+          target: envs.VITE_API_BASE_URL,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, '/api/v1'),
+        },
       },
     },
     plugins: [

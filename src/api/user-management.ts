@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'query-string';
 import { UserRole, UserStatus } from '@/store/modules/user/types';
 
 export interface User {
@@ -23,10 +22,5 @@ export interface QueryUserListRes {
 }
 
 export function queryUserList(params: QueryUserListReq) {
-  return axios.get<QueryUserListRes>('/api/user-management/list', {
-    params,
-    paramsSerializer: (obj) => {
-      return qs.stringify(obj);
-    },
-  });
+  return axios.post<QueryUserListRes>('/api/user/list', params);
 }

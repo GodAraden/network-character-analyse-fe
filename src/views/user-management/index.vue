@@ -224,6 +224,7 @@
             <a-button
               type="text"
               size="small"
+              :disabled="record.role === UserRole.ADMIN"
               :status="record.status === 'disable' ? 'success' : 'danger'"
             >
               {{
@@ -364,7 +365,7 @@
     try {
       const { data } = await queryUserList(params);
       renderData.value = data.list;
-      pagination.current = params.current;
+      pagination.current = params.current || 1;
       pagination.total = data.total;
     } catch (err) {
       // you can report use errorHandler or other

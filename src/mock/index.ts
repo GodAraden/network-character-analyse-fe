@@ -1,6 +1,6 @@
 import Mock from 'mockjs';
 
-import './user';
+// import './user';
 
 import '@/views/workspace/mock';
 
@@ -12,7 +12,7 @@ import '@/views/rule/mock';
 
 // import '@/views/user/mock';
 
-import '@/views/user-management/mock';
+// import '@/views/user-management/mock';
 
 Mock.setup({
   timeout: '600-1000',
