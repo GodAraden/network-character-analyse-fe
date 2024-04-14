@@ -15,6 +15,7 @@ import localeUserInfo from '@/views/user/locale/zh-CN';
 import localeUserManagement from '@/views/user-management/locale/zh-CN';
 
 import localeSettings from './zh-CN/settings';
+import localeTips from './zh-CN/tips';
 
 export default {
   'title': '网络人物关联信息分析系统',
@@ -30,6 +31,7 @@ export default {
   'messageBox.userCenter': '用户中心',
   'messageBox.logout': '登出登录',
   ...localeSettings,
+  ...localeTips,
   ...localeLogin,
   ...localeWorkspace,
 

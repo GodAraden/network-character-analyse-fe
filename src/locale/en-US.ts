@@ -15,6 +15,7 @@ import localeUserInfo from '@/views/user/locale/en-US';
 import localeUserManagement from '@/views/user-management/locale/en-US';
 
 import localeSettings from './en-US/settings';
+import localeTips from './en-US/tips';
 
 export default {
   'title': 'Network Character Related Information Analysis System',
@@ -30,6 +31,7 @@ export default {
   'messageBox.userCenter': 'User Center',
   'messageBox.logout': 'Logout',
   ...localeSettings,
+  ...localeTips,
   ...localeLogin,
   ...localeWorkspace,
 
