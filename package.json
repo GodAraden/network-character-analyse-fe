@@ -29,9 +29,11 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.44.7",
+    "@types/crypto-js": "^4.2.0",
     "@vueuse/core": "^9.3.0",
     "arco-design-pro-vue": "^2.7.2",
     "axios": "^0.24.0",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.5",
     "echarts": "^5.4.0",
     "lodash": "^4.17.21",

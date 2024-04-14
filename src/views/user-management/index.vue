@@ -13,8 +13,9 @@
             <a-row :gutter="16">
               <a-col :span="8">
                 <a-form-item field="id" :label="$t('userManagement.form.id')">
-                  <a-input
+                  <a-input-number
                     v-model="formModel.id"
+                    allow-clear
                     :placeholder="$t('userManagement.form.id.placeholder')"
                   />
                 </a-form-item>
@@ -26,6 +27,7 @@
                 >
                   <a-input
                     v-model="formModel.username"
+                    allow-clear
                     :placeholder="
                       $t('userManagement.form.username.placeholder')
                     "
@@ -39,6 +41,7 @@
                 >
                   <a-input
                     v-model="formModel.nickname"
+                    allow-clear
                     :placeholder="
                       $t('userManagement.form.nickname.placeholder')
                     "
@@ -52,6 +55,7 @@
                 >
                   <a-input
                     v-model="formModel.email"
+                    allow-clear
                     :placeholder="$t('userManagement.form.email.placeholder')"
                   />
                 </a-form-item>
@@ -199,6 +203,14 @@
         <template #index="{ rowIndex }">
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
         </template>
+        <template #nickname="{ record }">
+          <a-space>
+            <a-avatar :size="AvatarSizeMap[size]">
+              <img alt="avatar" :src="record.avatar" />
+            </a-avatar>
+            <a-typography-text>{{ record.nickname }}</a-typography-text>
+          </a-space>
+        </template>
         <template #role="{ record }">
           {{ $t(`userManagement.form.role.${record.role}`) }}
         </template>
@@ -220,11 +232,21 @@
                 username: record.username,
               })
             "
+            @ok="
+              () =>
+                handleUpdateUserStatus({
+                  id: record.id,
+                  status:
+                    record.status === UserStatus.DISABLE
+                      ? UserStatus.ENABLE
+                      : UserStatus.DISABLE,
+                })
+            "
           >
             <a-button
+              v-if="record.role !== UserRole.ADMIN"
               type="text"
               size="small"
-              :disabled="record.role === UserRole.ADMIN"
               :status="record.status === 'disable' ? 'success' : 'danger'"
             >
               {{
@@ -246,30 +268,42 @@
   import { computed, ref, reactive, watch, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import { queryUserList, User, QueryUserListReq } from '@/api/user-management';
+  import {
+    queryUserList,
+    QueryUserListReq,
+    updateUserStatus,
+    UpdateUserStatusReq,
+  } from '@/api/user-management';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
-  import { UserRole, UserStatus } from '@/store/modules/user/types';
+  import { UserRole, UserStatus, UserView } from '@/store/modules/user/types';
+  import { Message } from '@arco-design/web-vue';
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
+  const AvatarSizeMap: Record<SizeProps, number> = {
+    mini: 12,
+    small: 16,
+    medium: 20,
+    large: 24,
+  };
 
   const generateFormModel = () => {
     return {
-      id: '',
-      username: '',
-      nickname: '',
-      email: '',
+      id: undefined,
+      username: undefined,
+      nickname: undefined,
+      email: undefined,
       role: undefined,
       status: undefined,
     };
   };
   const { loading, setLoading } = useLoading(true);
   const { t } = useI18n();
-  const renderData = ref<User[]>([]);
+  const renderData = ref<UserView[]>([]);
   const formModel = ref(generateFormModel());
   const cloneColumns = ref<Column[]>([]);
   const showColumns = ref<Column[]>([]);
@@ -313,6 +347,7 @@
     {
       title: t('userManagement.columns.nickname'),
       dataIndex: 'nickname',
+      slotName: 'nickname',
     },
     {
       title: t('userManagement.columns.role'),
@@ -413,6 +448,18 @@
       );
     } else {
       cloneColumns.value.splice(index, 0, column);
+    }
+  };
+
+  const handleUpdateUserStatus = async (params: UpdateUserStatusReq) => {
+    try {
+      const { id } = await updateUserStatus(params);
+      if (id === params.id) {
+        Message.success(t('userManagement.columns.operations.tip.success'));
+        fetchData({ ...pagination, ...formModel.value });
+      }
+    } catch (error) {
+      // ...
     }
   };
 

@@ -3,15 +3,15 @@ import {
   login as userLogin,
   logout as userLogout,
   getUserInfo,
-  LoginData,
+  LoginParams,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
-import { UserRole, UserState, UserStatus } from './types';
+import { UserRole, UserStatus, UserView } from './types';
 import useAppStore from '../app';
 
 const useUserStore = defineStore('user', {
-  state: (): UserState => ({
+  state: (): UserView => ({
     id: -1,
     username: '',
     nickname: '',
@@ -23,7 +23,7 @@ const useUserStore = defineStore('user', {
   }),
 
   getters: {
-    userInfo(state: UserState): UserState {
+    userInfo(state: UserView): UserView {
       return { ...state };
     },
   },
@@ -37,7 +37,7 @@ const useUserStore = defineStore('user', {
       });
     },
     // Set user's information
-    setInfo(partial: Partial<UserState>) {
+    setInfo(partial: Partial<UserView>) {
       this.$patch(partial);
     },
 
@@ -53,10 +53,10 @@ const useUserStore = defineStore('user', {
     },
 
     // Login
-    async login(loginForm: LoginData) {
+    async login(loginForm: LoginParams) {
       try {
         const { id } = await userLogin(loginForm);
-        setToken(id);
+        setToken(id.toString());
       } catch (err) {
         clearToken();
         throw err;

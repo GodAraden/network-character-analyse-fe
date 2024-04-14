@@ -33,6 +33,7 @@ export default {
   'userManagement.columns.operations.disable': '停用',
   'userManagement.columns.operations.tip.status':
     '确认要{method}用户{nickname}({username})吗？ ',
+  'userManagement.columns.operations.tip.success': '操作成功',
 
   // size
   'userManagement.size.mini': '迷你',

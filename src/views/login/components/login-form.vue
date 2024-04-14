@@ -62,13 +62,14 @@
 <script lang="ts" setup>
   import { ref, reactive } from 'vue';
   import { useRouter } from 'vue-router';
+  import { MD5 } from 'crypto-js';
   import { Message } from '@arco-design/web-vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
   import { useI18n } from 'vue-i18n';
   import { useStorage } from '@vueuse/core';
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
-  import type { LoginData } from '@/api/user';
+  import type { LoginParams } from '@/api/user';
 
   const router = useRouter();
   const { t } = useI18n();
@@ -97,7 +98,12 @@
     if (!errors) {
       setLoading(true);
       try {
-        await userStore.login(values as LoginData);
+        const params = { ...values } as LoginParams;
+        if (params.password) {
+          params.password = MD5(params.password).toString();
+        }
+
+        await userStore.login(params);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
           name: (redirect as string) || 'Workspace',

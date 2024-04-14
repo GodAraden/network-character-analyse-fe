@@ -11,14 +11,16 @@ export const enum UserStatus {
   DISABLE = 'disable',
 }
 
-export interface UserState {
+export type UserEntity = {
   id: number;
   username: string;
   avatar: string;
-  // password: string;
+  password: string;
   nickname: string;
   email: string;
   createTime: number;
   status: UserStatus;
   role: UserRole;
-}
+};
+
+export type UserView = Omit<UserEntity, 'password'>;

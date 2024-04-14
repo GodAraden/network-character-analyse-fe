@@ -33,6 +33,7 @@ export default {
   'userManagement.columns.operations.disable': 'disable',
   'userManagement.columns.operations.tip.status':
     'Are you sure you want {method} user {nickname}({username})? ',
+  'userManagement.columns.operations.tip.success': 'Operation Success',
 
   // size
   'userManagement.size.mini': 'mini',

@@ -202,8 +202,9 @@
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import { RuleRecord, fetchRuleList } from '@/api/rule';
-  import { User, queryUserList } from '@/api/user-management';
+  import { queryUserList } from '@/api/user-management';
   import { showUser } from '@/utils/transformer';
+  import { UserView } from '@/store/modules/user/types';
 
   type Column = TableColumnData & { checked?: true };
 
@@ -308,7 +309,7 @@
   };
 
   const rules = ref<RuleRecord[]>([]);
-  const users = ref<User[]>([]);
+  const users = ref<UserView[]>([]);
   const bootstrap = async () => {
     try {
       const { data } = await fetchRuleList({});
