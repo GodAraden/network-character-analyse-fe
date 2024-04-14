@@ -5,7 +5,14 @@
     <a-space class="header" :size="12" direction="vertical" align="center">
       <a-avatar :size="64">
         <template #trigger-icon>
-          <icon-camera />
+          <a-upload
+            action="/api/user/avatar"
+            :show-file-list="false"
+            @before-upload="onCheckAvatar"
+            @success="onUpdateAvatar"
+          >
+            <template #upload-button><icon-camera /></template>
+          </a-upload>
         </template>
         <img :src="userInfo.avatar" />
       </a-avatar>
@@ -20,7 +27,9 @@
           </div>
           <div>
             <icon-user />
-            <a-typography-text>{{ userInfo.role }}</a-typography-text>
+            <a-typography-text>
+              {{ $t(`user.info.role.${userInfo.role}`) }}
+            </a-typography-text>
           </div>
           <div>
             <icon-email />
@@ -42,7 +51,14 @@
           </template>
           <template #description>
             <div class="content">
-              <a-typography-paragraph class="tip" editable>
+              <a-typography-paragraph
+                v-model:edit-text="userInfo.nickname"
+                class="tip"
+                editable
+                @edit-end="
+                  () => onUpdateUserInfo({ nickname: userInfo.nickname })
+                "
+              >
                 {{ userInfo.nickname }}
               </a-typography-paragraph>
             </div>
@@ -58,8 +74,13 @@
           </template>
           <template #description>
             <div class="content">
-              <a-typography-paragraph class="tip" editable>
-                {{ $t('user.placeholder.password') }}
+              <a-typography-paragraph
+                v-model:edit-text="password"
+                class="tip"
+                editable
+                @edit-end="() => onUpdatePassword(password)"
+              >
+                ********
               </a-typography-paragraph>
             </div>
           </template>
@@ -74,8 +95,12 @@
           </template>
           <template #description>
             <div class="content">
-              <a-typography-paragraph class="tip" editable>
-                <template #expand-node></template>
+              <a-typography-paragraph
+                v-model:edit-text="userInfo.email"
+                class="tip"
+                editable
+                @edit-end="() => onUpdateUserInfo({ email: userInfo.email })"
+              >
                 {{ userInfo.email }}
               </a-typography-paragraph>
             </div>
@@ -87,9 +112,53 @@
 </template>
 
 <script lang="ts" setup>
+  import { ref } from 'vue';
+  import { useI18n } from 'vue-i18n';
+  import { FileItem, Message } from '@arco-design/web-vue';
   import { useUserStore } from '@/store';
+  import { UpdateUserInfoAttrs, updateUserInfo } from '@/api/user';
+  import { MD5 } from 'crypto-js';
 
+  const { t } = useI18n();
   const userInfo = useUserStore();
+
+  const password = ref('');
+
+  const onCheckAvatar = (file: File) => {
+    const { size, type } = file;
+    if (!type.startsWith('image/')) {
+      Message.error(t('user.avatar.upload.tip.type'));
+      return false;
+    }
+    if (size > 500 * 1024) {
+      Message.error(t('user.avatar.upload.tip.size'));
+      return false;
+    }
+    return true;
+  };
+
+  const onUpdateAvatar = async (fileItem: FileItem) => {
+    userInfo.avatar = fileItem.url || '';
+    const base = import.meta.env.VITE_API_BASE_URL;
+    onUpdateUserInfo({ avatar: `${base}/${fileItem.response.data}` });
+  };
+
+  const onUpdatePassword = async (value: string) => {
+    if (!value) return;
+    await onUpdateUserInfo({ password: MD5(value).toString() });
+    password.value = '';
+  };
+
+  const onUpdateUserInfo = async (params: UpdateUserInfoAttrs) => {
+    try {
+      const { id } = await updateUserInfo({ id: userInfo.id, ...params });
+      if (id === userInfo.id) {
+        Message.success(t('tips.success.update'));
+      }
+    } catch (error) {
+      // ...
+    }
+  };
 </script>
 
 <script lang="ts">

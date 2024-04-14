@@ -7,7 +7,7 @@ import {
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
-import { UserRole, UserStatus, UserView } from './types';
+import { UserEntity, UserRole, UserStatus, UserView } from './types';
 import useAppStore from '../app';
 
 const useUserStore = defineStore('user', {
@@ -37,7 +37,10 @@ const useUserStore = defineStore('user', {
       });
     },
     // Set user's information
-    setInfo(partial: Partial<UserView>) {
+    setInfo(partial: Partial<UserEntity>) {
+      if ('password' in partial) {
+        delete partial.password;
+      }
       this.$patch(partial);
     },
 

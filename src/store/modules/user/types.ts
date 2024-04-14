@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-shadow
 export const enum UserRole {
   NONE = '',
-  ALL = '*',
   ADMIN = 'admin',
   USER = 'user',
 }

@@ -1,4 +1,10 @@
 export default {
+  'tips.success.operation': 'Operation successful',
+  'tips.success.update': 'Update successful',
+  'tips.success.create': 'Created successfully',
+  'tips.success.disable': 'Disabled',
+  'tips.success.enable': 'Enabled',
+
   'tips.error.undefined': 'Unknown Error',
   'tips.error.UserNotFound': 'User does not exist',
   'tips.error.WrongPassword': 'Wrong password',

@@ -455,7 +455,7 @@
     try {
       const { id } = await updateUserStatus(params);
       if (id === params.id) {
-        Message.success(t('userManagement.columns.operations.tip.success'));
+        Message.success(t(`tips.success.${params.status}`));
         fetchData({ ...pagination, ...formModel.value });
       }
     } catch (error) {

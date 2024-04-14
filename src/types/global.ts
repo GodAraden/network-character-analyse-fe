@@ -35,3 +35,7 @@ export interface GeneralChart {
   xAxis: string[];
   data: Array<{ name: string; value: number[] }>;
 }
+
+export type Mixin<T> = {
+  [key in keyof T]: T[key];
+};
