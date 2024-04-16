@@ -18,6 +18,7 @@ export default {
   'userManagement.form.selectDefault': '全部',
 
   'userManagement.operation.create': '新建',
+  'userManagement.operation.create.placeholder': '请输入要添加的用户名',
   'userManagement.operation.import': '批量导入',
   'userManagement.operation.download': '下载',
   // columns
@@ -26,7 +27,7 @@ export default {
   'userManagement.columns.nickname': '昵称',
   'userManagement.columns.role': '角色',
   'userManagement.columns.email': '邮箱',
-  'userManagement.columns.createdTime': '创建时间',
+  'userManagement.columns.createTime': '创建时间',
   'userManagement.columns.status': '状态',
   'userManagement.columns.operations': '操作',
   'userManagement.columns.operations.enable': '启用',

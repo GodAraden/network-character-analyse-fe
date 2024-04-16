@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserView } from '@/store/modules/user/types';
+import { UserEntity, UserView } from '@/store/modules/user/types';
 
 export interface QueryUserListReq extends Partial<UserView> {
   current?: number;
@@ -23,5 +23,17 @@ export async function updateUserStatus(params: UpdateUserStatusReq) {
     `/api/user/status/${id}`,
     { status }
   );
+  return data;
+}
+
+export type CreateUserReq = Pick<
+  UserEntity,
+  'username' | 'password' | 'nickname'
+>;
+export type CreateUserRes = { count: number };
+export async function createUser(params: CreateUserReq[]) {
+  const { data } = await axios.post<CreateUserRes>('/api/user/create', {
+    users: params,
+  });
   return data;
 }

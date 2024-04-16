@@ -156,7 +156,7 @@
         Message.success(t('tips.success.update'));
       }
     } catch (error) {
-      // ...
+      await userInfo.info();
     }
   };
 </script>

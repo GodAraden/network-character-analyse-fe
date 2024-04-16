@@ -111,12 +111,19 @@
       <a-row style="margin-bottom: 16px">
         <a-col :span="12">
           <a-space>
-            <a-button type="primary">
-              <template #icon>
+            <a-input-search
+              search-button
+              :placeholder="$t('userManagement.operation.create.placeholder')"
+              @search="onCreateUser"
+              @press-enter="(e: any) => onCreateUser(e.target.value)"
+            >
+              <template #button-icon>
                 <icon-plus />
               </template>
-              {{ $t('userManagement.operation.create') }}
-            </a-button>
+              <template #button-default>
+                {{ $t('userManagement.operation.create') }}
+              </template>
+            </a-input-search>
             <a-upload action="/">
               <template #upload-button>
                 <a-button>
@@ -269,6 +276,7 @@
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
   import {
+    createUser,
     queryUserList,
     QueryUserListReq,
     updateUserStatus,
@@ -281,6 +289,7 @@
   import Sortable from 'sortablejs';
   import { UserRole, UserStatus, UserView } from '@/store/modules/user/types';
   import { Message } from '@arco-design/web-vue';
+  import { MD5 } from 'crypto-js';
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
@@ -359,8 +368,8 @@
       dataIndex: 'email',
     },
     {
-      title: t('userManagement.columns.createdTime'),
-      dataIndex: 'createdTime',
+      title: t('userManagement.columns.createTime'),
+      dataIndex: 'createTime',
     },
     {
       title: t('userManagement.columns.status'),
@@ -419,9 +428,30 @@
     fetchData({ ...basePagination, current });
   };
 
-  fetchData();
+  fetchData(pagination);
   const reset = () => {
     formModel.value = generateFormModel();
+  };
+
+  const onCreateUser = async (value: string) => {
+    try {
+      const { count } = await createUser([
+        {
+          username: value,
+          password: MD5(value).toString(),
+          nickname: value,
+        },
+      ]);
+      if (count === 1) {
+        Message.success(t('tips.success.create'));
+        fetchData({
+          ...basePagination,
+          ...formModel.value,
+        });
+      }
+    } catch (err) {
+      // ...
+    }
   };
 
   const getStatuOperation = (current: UserStatus) => {

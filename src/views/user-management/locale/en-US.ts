@@ -26,7 +26,7 @@ export default {
   'userManagement.columns.nickname': 'nickname',
   'userManagement.columns.role': 'role',
   'userManagement.columns.email': 'Email',
-  'userManagement.columns.createdTime': 'Creation time',
+  'userManagement.columns.createTime': 'Creation time',
   'userManagement.columns.status': 'status',
   'userManagement.columns.operations': 'Operations',
   'userManagement.columns.operations.enable': 'enable',
