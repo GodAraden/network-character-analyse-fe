@@ -1,6 +1,7 @@
+import { h } from 'vue';
 import axios from 'axios';
 import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Message } from '@arco-design/web-vue';
+import { Notification, Message } from '@arco-design/web-vue';
 import { getToken } from '@/utils/auth';
 import i18n from '@/locale';
 
@@ -41,12 +42,29 @@ axios.interceptors.response.use(
   },
   (error: AxiosError<HttpResponse>) => {
     const res = error.response?.data;
-    const tip = i18n.global.t(`tips.error.${res?.message}`);
-    Message.error({
-      content: tip,
-      duration: 5 * 1000,
-    });
-    if (res) res.message = tip;
+    const { message } = res || { message: '' };
+
+    if (Array.isArray(message)) {
+      Notification.error({
+        title: i18n.global.t('tips.error.ParameterCheckFailed'),
+        content: () =>
+          h(
+            'div',
+            null,
+            message.map((msg) => h('p', null, msg))
+          ),
+        closable: true,
+        duration: 5 * 60 * 1000,
+      });
+    } else if (typeof message === 'string') {
+      const tip = i18n.global.t(`tips.error.${res?.message}`);
+      Message.error({
+        content: tip,
+        duration: 5 * 1000,
+      });
+      if (res) res.message = tip;
+    }
+
     return Promise.reject(res);
   }
 );

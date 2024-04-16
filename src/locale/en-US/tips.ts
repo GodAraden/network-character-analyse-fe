@@ -6,6 +6,7 @@ export default {
   'tips.success.enable': 'Enabled',
 
   'tips.error.undefined': 'Unknown Error',
+  'tips.error.ParameterCheckFailed': 'Parameter Check Failed',
   'tips.error.UserNotFound': 'User does not exist',
   'tips.error.WrongPassword': 'Wrong password',
   'tips.error.UserDisabled':
