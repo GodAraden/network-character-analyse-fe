@@ -111,17 +111,20 @@
       <a-row style="margin-bottom: 16px">
         <a-col :span="12">
           <a-space>
+            <a-tooltip :content="$t('userManagement.operation.create.tooltip')">
+              <span class="select-none">
+                {{ $t('userManagement.operation.create') }}：
+              </span>
+            </a-tooltip>
             <a-input-search
+              v-model="newUsername"
               search-button
               :placeholder="$t('userManagement.operation.create.placeholder')"
               @search="onCreateUser"
-              @press-enter="(e: any) => onCreateUser(e.target.value)"
+              @press-enter="onCreateUser"
             >
               <template #button-icon>
                 <icon-plus />
-              </template>
-              <template #button-default>
-                {{ $t('userManagement.operation.create') }}
               </template>
             </a-input-search>
             <a-upload action="/">
@@ -314,6 +317,7 @@
   const { t } = useI18n();
   const renderData = ref<UserView[]>([]);
   const formModel = ref(generateFormModel());
+  const newUsername = ref('');
   const cloneColumns = ref<Column[]>([]);
   const showColumns = ref<Column[]>([]);
 
@@ -433,13 +437,15 @@
     formModel.value = generateFormModel();
   };
 
-  const onCreateUser = async (value: string) => {
+  const onCreateUser = async () => {
+    if (!newUsername.value) return;
+
     try {
       const { count } = await createUser([
         {
-          username: value,
-          password: MD5(value).toString(),
-          nickname: value,
+          username: newUsername.value,
+          password: MD5(newUsername.value).toString(),
+          nickname: newUsername.value,
         },
       ]);
       if (count === 1) {
@@ -448,6 +454,7 @@
           ...basePagination,
           ...formModel.value,
         });
+        newUsername.value = '';
       }
     } catch (err) {
       // ...

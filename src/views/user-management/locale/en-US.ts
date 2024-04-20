@@ -17,7 +17,9 @@ export default {
   'userManagement.form.reset': 'Reset',
   'userManagement.form.selectDefault': 'All',
 
-  'userManagement.operation.create': 'New',
+  'userManagement.operation.create': 'New user',
+  'userManagement.operation.create.tooltip':
+    'The initial nickname and password are the entered username',
   'userManagement.operation.import': 'Batch import',
   'userManagement.operation.download': 'Download',
   // columns

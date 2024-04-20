@@ -17,7 +17,8 @@ export default {
   'userManagement.form.reset': '重置',
   'userManagement.form.selectDefault': '全部',
 
-  'userManagement.operation.create': '新建',
+  'userManagement.operation.create': '新建用户',
+  'userManagement.operation.create.tooltip': '初始昵称与密码为输入的用户名',
   'userManagement.operation.create.placeholder': '请输入要添加的用户名',
   'userManagement.operation.import': '批量导入',
   'userManagement.operation.download': '下载',
