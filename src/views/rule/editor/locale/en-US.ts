@@ -44,6 +44,9 @@ export default {
   'rule.editor.rules.placeholder.path':
     'The part after the domain name, e.g. /api/v1/search',
   'rule.editor.rules.error.path.required': 'Please enter API path',
+  'rule.editor.rules.label.method': 'Request method',
+  'rule.editor.rules.error.method.required': 'Please select the request method',
+  'rule.editor.rules.placeholder.method': 'Please select the request method',
   'rule.editor.rules.error.path.pattern': 'Please enter the correct API path',
   'rule.editor.rules.label.parameter': 'parameter rules',
   'rule.editor.rules.placeholder.parameter':

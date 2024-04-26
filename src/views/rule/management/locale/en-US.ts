@@ -1,6 +1,6 @@
 export default {
   'menu.rule.management': 'rule management',
-  'rule.management.form.name.placeholder': 'enter a rule name to retrieve',
+  'rule.management.form.name.placeholder': 'enter a keyword to retrieve',
   'rule.management.form.search': 'query',
   'rule.management.form.reset': 'reset',
   'rule.management.form.selectDefault': 'all',
@@ -15,8 +15,12 @@ export default {
   'rule.management.columns.depth': 'crawl depth',
   'rule.management.columns.rules': 'number of rules',
   'rule.management.columns.operations': 'operations',
+  'rule.management.columns.operations.copy': 'copy',
   'rule.management.columns.operations.view': 'view',
   'rule.management.columns.operations.update': 'edit',
+  'rule.management.columns.operations.delete': 'delete',
+  'rule.management.columns.operations.delete.confirm':
+    'Are you sure you want to delete rule <{name}>?',
 
   // size
   'rule.management.size.mini': 'mini',

@@ -1,7 +1,8 @@
 export default {
   'tips.success.operation': 'Operation successful',
   'tips.success.update': 'Update successful',
-  'tips.success.create': 'Created successfully',
+  'tips.success.create': 'Create successful',
+  'tips.success.delete': 'Delete successful',
   'tips.success.disable': 'Disabled',
   'tips.success.enable': 'Enabled',
 

@@ -36,17 +36,26 @@ export function provideFormData() {
     }
   };
 
+  const getPureRule = (rule: RuleRecord, delRuleId = true) => {
+    if (delRuleId) delete rule.id;
+    rule.rules.forEach((item) => {
+      delete item.id;
+      delete item.ruleId;
+    });
+    return rule;
+  };
+
   const onSubmit = async () => {
     setLoading(true);
     try {
       if (mode === 'create') {
-        const res = await createRule(formData.value);
+        const res = await createRule(getPureRule(formData.value));
         if (res.id) {
           step.value = 3;
           formData.value.id = res.id;
         }
       } else if (mode === 'update') {
-        const isUpdated = await updateRule(formData.value);
+        const isUpdated = await updateRule(getPureRule(formData.value, false));
         if (isUpdated) {
           step.value = 3;
         }

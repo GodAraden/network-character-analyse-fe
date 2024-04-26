@@ -2,6 +2,7 @@ export default {
   'tips.success.operation': '操作成功',
   'tips.success.update': '更新成功',
   'tips.success.create': '创建成功',
+  'tips.success.delete': '删除成功',
   'tips.success.disable': '已停用',
   'tips.success.enable': '已启用',
 

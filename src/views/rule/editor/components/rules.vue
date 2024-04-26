@@ -73,6 +73,26 @@
         </a-form-item>
         <a-form-item
           validate-trigger="input"
+          :field="`rules[${index}].method`"
+          :label="$t('rule.editor.rules.label.method')"
+          :rules="[
+            {
+              required: true,
+              message: $t('rule.editor.rules.error.method.required'),
+            },
+          ]"
+        >
+          <a-select
+            v-model="item.method"
+            :placeholder="$t('rule.editor.rules.placeholder.method')"
+          >
+            <a-option v-for="method in ['get', 'post']" :key="method">
+              {{ method }}
+            </a-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item
+          validate-trigger="input"
           :field="`rules[${index}].parameter`"
           :label="$t('rule.editor.rules.label.parameter')"
           :rules="[
@@ -153,6 +173,7 @@
     formData.value.rules.push({
       name: '',
       path: '',
+      method: 'get',
       parameter: '',
       resolve: '',
       order: formData.value.rules.length + 1,

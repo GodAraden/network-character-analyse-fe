@@ -1,6 +1,6 @@
 export default {
   'menu.rule.management': '规则管理',
-  'rule.management.form.name.placeholder': '输入规则名称以检索',
+  'rule.management.form.name.placeholder': '输入关键词以检索',
   'rule.management.form.search': '查询',
   'rule.management.form.reset': '重置',
   'rule.management.form.selectDefault': '全部',
@@ -18,6 +18,9 @@ export default {
   'rule.management.columns.operations.copy': '复制',
   'rule.management.columns.operations.view': '查看',
   'rule.management.columns.operations.update': '编辑',
+  'rule.management.columns.operations.delete': '删除',
+  'rule.management.columns.operations.delete.confirm':
+    '确定要删除规则 <{name}> 吗？',
 
   // size
   'rule.management.size.mini': '迷你',

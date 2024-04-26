@@ -17,7 +17,7 @@
           message: $t('rule.editor.basic.error.name.required'),
         },
         {
-          match: /^[a-zA-Z0-9\u4e00-\u9fa5]{1,20}$/,
+          match: /^.{1,20}$/,
           message: $t('rule.editor.basic.error.name.pattern'),
         },
       ]"

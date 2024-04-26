@@ -54,7 +54,7 @@ axios.interceptors.response.use(
             message.map((msg) => h('p', null, msg))
           ),
         closable: true,
-        duration: 5 * 60 * 1000,
+        duration: 10 * 1000,
       });
     } else if (typeof message === 'string') {
       const tip = i18n.global.t(`tips.error.${res?.message}`);

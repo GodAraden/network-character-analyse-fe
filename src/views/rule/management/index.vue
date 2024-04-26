@@ -11,6 +11,7 @@
         "
       >
         <a-input-search
+          v-model="keyword"
           size="small"
           search-button
           :placeholder="$t('rule.management.form.name.placeholder')"
@@ -96,12 +97,13 @@
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
         </template>
         <template #rules="{ record }">
-          {{ record.rules.length }}
+          {{ record.rules }}
         </template>
         <template #operations="{ record }">
           <a-button
             type="text"
             size="small"
+            status="success"
             @click="() => onOpenEditor('create', record.id)"
           >
             {{ $t('rule.management.columns.operations.copy') }}
@@ -116,10 +118,24 @@
           <a-button
             type="text"
             size="small"
+            status="warning"
             @click="() => onOpenEditor('update', record.id)"
           >
             {{ $t('rule.management.columns.operations.update') }}
           </a-button>
+
+          <a-popconfirm
+            :content="
+              $t('rule.management.columns.operations.delete.confirm', {
+                name: record.name,
+              })
+            "
+            @ok="() => onDeleteRule(record.id)"
+          >
+            <a-button type="text" size="small" status="danger">
+              {{ $t('rule.management.columns.operations.delete') }}
+            </a-button>
+          </a-popconfirm>
         </template>
       </a-table>
     </a-card>
@@ -134,26 +150,22 @@
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
-  import { fetchRuleList, RuleRecord, FetchRuleListReq } from '@/api/rule';
+  import {
+    fetchRuleList,
+    RuleRecord,
+    FetchRuleListReq,
+    deleteRule,
+  } from '@/api/rule';
   import { useRouter } from 'vue-router';
+  import { Message } from '@arco-design/web-vue';
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
 
-  const generateFormModel = () => {
-    return {
-      number: '',
-      name: '',
-      contentType: '',
-      filterType: '',
-      createdTime: [],
-      status: '',
-    };
-  };
   const { loading, setLoading } = useLoading(true);
   const { t } = useI18n();
+  const keyword = ref<string>();
   const renderData = ref<RuleRecord[]>([]);
-  const formModel = ref(generateFormModel());
   const cloneColumns = ref<Column[]>([]);
   const showColumns = ref<Column[]>([]);
 
@@ -219,10 +231,11 @@
   ]);
 
   const fetchData = async (
-    params: FetchRuleListReq = { current: 1, pageSize: 20 }
+    params: FetchRuleListReq & { total?: number } = { current: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
+      delete params.total;
       const { data } = await fetchRuleList(params);
       renderData.value = data.list;
       pagination.current = params.current || 1;
@@ -235,13 +248,10 @@
   };
 
   const search = () => {
-    fetchData({
-      ...basePagination,
-      ...formModel.value,
-    } as unknown as FetchRuleListReq);
+    fetchData({ ...basePagination, keyword: keyword.value });
   };
   const onPageChange = (current: number) => {
-    fetchData({ ...basePagination, current });
+    fetchData({ ...basePagination, current, keyword: keyword.value });
   };
 
   fetchData();
@@ -301,6 +311,21 @@
           },
         });
       });
+    }
+  };
+
+  const onDeleteRule = async (id: string) => {
+    try {
+      const res = await deleteRule({ id });
+      if (res.id === id) {
+        Message.success(t('tips.success.delete'));
+        fetchData({
+          ...pagination,
+          keyword: keyword.value,
+        });
+      }
+    } catch (error) {
+      //
     }
   };
 

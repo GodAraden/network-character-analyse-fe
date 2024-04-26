@@ -41,6 +41,9 @@ export default {
   'rule.editor.rules.placeholder.path': '域名后的部分，如 /api/v1/search',
   'rule.editor.rules.error.path.required': '请输入 API 路径',
   'rule.editor.rules.error.path.pattern': '请输入正确的 API 路径',
+  'rule.editor.rules.label.method': '请求方法',
+  'rule.editor.rules.error.method.required': '请选择请求方法',
+  'rule.editor.rules.placeholder.method': '请选择请求方法',
   'rule.editor.rules.label.parameter': '参数规则',
   'rule.editor.rules.placeholder.parameter':
     'JSON 格式，限制请求参数包含内容，如 Query、Params、Body',

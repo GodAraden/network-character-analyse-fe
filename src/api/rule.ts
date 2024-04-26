@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'query-string';
 
 export interface BaseInfoModel {
   name: string;
@@ -8,14 +7,17 @@ export interface BaseInfoModel {
 }
 
 export interface RuleItem {
+  id?: string;
   name: string;
+  method: string;
   order: number;
   path: string;
   resolve: string;
   parameter: string;
+  ruleId?: string;
 }
 
-export type RuleRecord = BaseInfoModel & { id: string; rules: RuleItem[] };
+export type RuleRecord = BaseInfoModel & { id?: string; rules: RuleItem[] };
 
 export type CreateRuleReq = BaseInfoModel & { rules: RuleItem[] };
 export type CreateRuleRes = { id: string };
@@ -29,11 +31,13 @@ export type UpdateRuleReq = Partial<RuleRecord>;
 export type UpdateRuleRes = boolean;
 
 export async function updateRule(params: UpdateRuleReq) {
-  const { data } = await axios.post<UpdateRuleRes>('/api/rule/update', params);
+  const { id, ...rest } = params;
+  const { data } = await axios.patch<UpdateRuleRes>(`/api/rule/${id}`, rest);
   return data;
 }
 
-export interface FetchRuleListReq extends Partial<RuleRecord> {
+export interface FetchRuleListReq {
+  keyword?: string;
   current?: number;
   pageSize?: number;
 }
@@ -44,12 +48,7 @@ export interface FetchRuleListRes {
 }
 
 export function fetchRuleList(params: FetchRuleListReq) {
-  return axios.get<FetchRuleListRes>('/api/rule/list', {
-    params,
-    paramsSerializer: (obj) => {
-      return qs.stringify(obj);
-    },
-  });
+  return axios.post<FetchRuleListRes>('/api/rule/list', params);
 }
 
 export interface FetchRuleInfoReq {
@@ -59,10 +58,18 @@ export interface FetchRuleInfoReq {
 export type FetchRuleInfoRes = RuleRecord;
 
 export function fetchRuleInfo(params: FetchRuleInfoReq) {
-  return axios.get<FetchRuleInfoRes>('/api/rule/info', {
-    params,
-    paramsSerializer: (obj) => {
-      return qs.stringify(obj);
-    },
-  });
+  return axios.get<FetchRuleInfoRes>(`/api/rule/${params.id}`);
+}
+
+export interface DeleteRuleReq {
+  id: string;
+}
+
+export interface DeleteRuleRes {
+  id: string;
+}
+
+export async function deleteRule(params: DeleteRuleReq) {
+  const { data } = await axios.delete(`/api/rule/${params.id}`);
+  return data;
 }

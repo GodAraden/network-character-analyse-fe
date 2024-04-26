@@ -6,10 +6,19 @@
       :subtitle="$t(`rule.editor.${mode}.success.subTitle`)"
     />
     <a-space :size="16">
-      <a-button key="view" type="primary" @click="() => viewInfo(formData.id)">
+      <a-button
+        key="view"
+        type="primary"
+        @click="() => formData.id && viewInfo(formData.id)"
+      >
         {{ $t('rule.editor.button.view') }}
       </a-button>
-      <a-button key="again" type="secondary" @click="resetForm">
+      <a-button
+        v-if="mode !== 'update'"
+        key="again"
+        type="secondary"
+        @click="resetForm"
+      >
         {{ $t('rule.editor.button.again') }}
       </a-button>
     </a-space>
