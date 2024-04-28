@@ -2,6 +2,8 @@ import { createApp } from 'vue';
 import ArcoVue from '@arco-design/web-vue';
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import globalComponents from '@/components';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import router from './router';
 import store from './store';
 import i18n from './locale';
@@ -13,6 +15,8 @@ import App from './App.vue';
 // https://arco.design/docs/designlab/use-theme-package
 import '@/assets/style/global.less';
 import '@/api/interceptor';
+
+dayjs.extend(utc);
 
 const app = createApp(App);
 

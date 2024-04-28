@@ -37,7 +37,7 @@ const data = Mock.mock({
       'name': /^查询\d{3}$/,
       'network': '',
       'analyse': '',
-      'createdAt': +new Date(Random.date()),
+      'createAt': +new Date(Random.date()),
       'operator|1': usernames,
       'status|1': [-1, 0, 1],
     },

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-unused-vars -->
 <template>
   <div class="my-container">
     <Breadcrumb :items="['menu.query', 'menu.query.management']" />
@@ -15,6 +16,7 @@
                 <a-form-item field="id" :label="$t('query.management.form.id')">
                   <a-input
                     v-model="formModel.id"
+                    allow-clear
                     :placeholder="$t('query.management.form.id.placeholder')"
                   />
                 </a-form-item>
@@ -26,6 +28,7 @@
                 >
                   <a-input
                     v-model="formModel.name"
+                    allow-clear
                     :placeholder="$t('query.management.form.name.placeholder')"
                   />
                 </a-form-item>
@@ -38,6 +41,7 @@
                   <a-select
                     v-model="formModel.ruleId"
                     allow-search
+                    allow-clear
                     :options="
                       rules.map((rule) => ({
                         label: rule.name,
@@ -50,12 +54,13 @@
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="operator"
+                  field="operatorId"
                   :label="$t('query.management.form.operator')"
                 >
                   <a-select
-                    v-model="formModel.operator"
+                    v-model="formModel.operatorId"
                     allow-search
+                    allow-clear
                     :options="
                       users.map((user) => ({
                         label: showUser(user),
@@ -68,11 +73,12 @@
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="createdAt"
-                  :label="$t('query.management.form.createdAt')"
+                  field="createTimeRange"
+                  :label="$t('query.management.form.createAt')"
                 >
                   <a-range-picker
-                    v-model="formModel.createdAt"
+                    v-model="formModel.createTimeRange"
+                    allow-clear
                     style="width: 100%"
                   />
                 </a-form-item>
@@ -86,6 +92,7 @@
                     v-model="formModel.status"
                     :options="statusOptions"
                     :placeholder="$t('query.management.form.selectDefault')"
+                    allow-clear
                   />
                 </a-form-item>
               </a-col>
@@ -122,8 +129,8 @@
         <template #index="{ rowIndex }">
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
         </template>
-        <template #createdAt="{ record }">
-          {{ new Date(record.createdAt).toLocaleString() }}
+        <template #createAt="{ record }">
+          {{ new Date(record.createAt).toLocaleString() }}
         </template>
         <template #ruleId="{ record }">
           <a-button
@@ -144,34 +151,27 @@
           </a-button>
         </template>
         <template #operator="{ record }">
-          {{
-            showUser(
-              users.find((user) => user.id === record.ruleId) || {
-                nickname: `用户${Math.floor(Math.random() * 90 + 10)}`,
-                username: `zhangsan${Math.floor(Math.random() * 90 + 10)}`,
-              }
-            )
-          }}
+          {{ showUser(users.find((user) => user.id === record.operatorId)) }}
         </template>
         <template #status="{ record }">
           <a-typography-text
             :type="
-              record.status === 1
+              record.status === QueryStatus.success
                 ? 'success'
-                : record.status === -1
+                : record.status === QueryStatus.failed
                 ? 'danger'
                 : 'secondary'
             "
           >
-            <icon-loading v-if="record.status === 0" />
-            <icon-close v-else-if="record.status === -1" />
-            <icon-check v-else-if="record.status === 1" />
+            <icon-loading v-if="record.status === QueryStatus.loading" />
+            <icon-close v-else-if="record.status === QueryStatus.failed" />
+            <icon-check v-else-if="record.status === QueryStatus.success" />
             {{ $t(`query.management.form.status.${record.status}`) }}
           </a-typography-text>
         </template>
         <template #operations="{ record }">
           <a-button
-            :disabled="record.status !== 1"
+            :disabled="record.status !== QueryStatus.success"
             type="text"
             size="small"
             @click="
@@ -196,7 +196,12 @@
   import { computed, ref, reactive, watch } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import { fetchQueryList, PolicyRecord, FetchQueryListReq } from '@/api/query';
+  import {
+    PolicyRecord,
+    FetchQueryListReq,
+    fetchQueryList,
+    QueryStatus,
+  } from '@/api/query';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
@@ -205,17 +210,18 @@
   import { queryUserList } from '@/api/user-management';
   import { showUser } from '@/utils/transformer';
   import { UserView } from '@/store/modules/user/types';
+  import dayjs from 'dayjs';
 
   type Column = TableColumnData & { checked?: true };
 
   const generateFormModel = () => {
     return {
-      id: '',
-      name: '',
-      ruleId: '',
-      operator: '',
-      createdAt: [],
-      status: '',
+      id: undefined,
+      name: undefined,
+      ruleId: undefined,
+      operatorId: undefined,
+      createTimeRange: undefined,
+      status: undefined,
     };
   };
   const { loading, setLoading } = useLoading(true);
@@ -257,9 +263,9 @@
       slotName: 'operator',
     },
     {
-      title: t('query.management.columns.createdAt'),
-      dataIndex: 'createdAt',
-      slotName: 'createdAt',
+      title: t('query.management.columns.createAt'),
+      dataIndex: 'createAt',
+      slotName: 'createAt',
     },
     {
       title: t('query.management.columns.status'),
@@ -272,16 +278,31 @@
     },
   ]);
   const statusOptions = computed<SelectOptionData[]>(() =>
-    [-1, 0, 1].map((status) => ({
-      label: t(`query.management.form.status.${status}`),
-      value: status,
-    }))
+    [QueryStatus.failed, QueryStatus.loading, QueryStatus.success].map(
+      (status) => ({
+        label: t(`query.management.form.status.${status}`),
+        value: status,
+      })
+    )
   );
   const fetchData = async (
     params: FetchQueryListReq = { current: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
+      Object.keys(params).forEach((sourceKey: string) => {
+        const key = sourceKey as keyof FetchQueryListReq;
+        if (params[key] === '' || params[key] === undefined) {
+          delete params[key];
+        }
+      });
+
+      if (params.createTimeRange) {
+        params.createTimeRange = params.createTimeRange.map((time) =>
+          dayjs(time).utc().format()
+        ) as [string, string];
+      }
+
       const data = await fetchQueryList(params);
       renderData.value = data.list;
       pagination.current = params.current || 1;

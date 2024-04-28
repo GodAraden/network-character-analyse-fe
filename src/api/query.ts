@@ -145,18 +145,27 @@ export async function startQuery(params: StartQueryReq) {
   return data;
 }
 
+// eslint-disable-next-line no-shadow
+export const enum QueryStatus {
+  loading = 'loading',
+  success = 'success',
+  failed = 'failed',
+}
+
 export interface Query {
   id: string;
   name: string;
   ruleId: string;
   network: string;
   analyse: string;
-  createdAt: string;
+  createAt: string;
   operator: string;
   status: number;
 }
 
 export interface FetchQueryListReq extends Partial<Query> {
+  createTimeRange?: [string, string];
+
   current?: number;
   pageSize?: number;
 }
