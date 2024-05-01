@@ -37,6 +37,7 @@ const LIST: AppRouteRecordRaw = {
       meta: {
         locale: 'menu.query.result',
         requiresAuth: true,
+        hideInMenu: true,
       },
     },
   ],

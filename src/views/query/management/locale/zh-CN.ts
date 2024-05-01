@@ -24,4 +24,7 @@ export default {
   'query.management.columns.status': '状态',
   'query.management.columns.operations': '操作',
   'query.management.columns.operations.view': '查看',
+  'query.management.columns.operations.delete.confirm':
+    '确定要删除记录 {name} 吗？',
+  'query.management.columns.operations.delete': '删除',
 };

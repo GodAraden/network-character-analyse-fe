@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserEntity, UserView } from '@/store/modules/user/types';
+import { UserEntity, UserInfoView, UserView } from '@/store/modules/user/types';
 
 export interface QueryUserListReq extends Partial<UserView> {
   current?: number;
@@ -36,4 +36,8 @@ export async function createUser(params: CreateUserReq[]) {
     users: params,
   });
   return data;
+}
+
+export function queryAllUser() {
+  return axios.get<UserInfoView[]>('/api/user/all');
 }

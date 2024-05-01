@@ -23,4 +23,7 @@ export default {
   'query.management.columns.status': 'status',
   'query.management.columns.operations': 'operations',
   'query.management.columns.operations.view': 'view',
+  'query.management.columns.operations.delete.confirm':
+    'Are you sure you want to delete the record {name}?',
+  'query.management.columns.operations.delete': 'delete',
 };

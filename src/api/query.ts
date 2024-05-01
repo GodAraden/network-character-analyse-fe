@@ -133,7 +133,7 @@ export interface StartQueryReq {
   ruleId: string;
   name: string;
   header: string;
-  params: string;
+  parameter: string;
   other?: string;
 }
 export interface StartQueryRes {
@@ -177,5 +177,14 @@ export interface FetchQueryListRes {
 
 export async function fetchQueryList(params: FetchQueryListReq) {
   const { data } = await axios.post('/api/query/list', params);
+  return data;
+}
+
+export interface DeleteQueryRes {
+  id: string;
+}
+
+export async function deleteQuery(id: string) {
+  const { data } = await axios.delete<DeleteQueryRes>(`/api/query/${id}`);
   return data;
 }

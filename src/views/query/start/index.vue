@@ -68,23 +68,23 @@
           />
         </a-form-item>
         <a-form-item
-          field="params"
+          field="parameter"
           validate-trigger="input"
-          :label="$t('query.start.form.label.params')"
+          :label="$t('query.start.form.label.parameter')"
           :rules="[
             {
               required: true,
-              message: $t('query.start.form.error.params.required'),
+              message: $t('query.start.form.error.parameter.required'),
             },
             {
               validator: jsonValidator,
-              message: $t('query.start.form.error.params.pattern'),
+              message: $t('query.start.form.error.parameter.pattern'),
             },
           ]"
         >
           <a-textarea
-            v-model="formData.params"
-            :placeholder="$t('query.start.form.placeholder.params')"
+            v-model="formData.parameter"
+            :placeholder="$t('query.start.form.placeholder.parameter')"
           />
         </a-form-item>
         <a-form-item

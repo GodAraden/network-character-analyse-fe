@@ -186,6 +186,26 @@
           >
             {{ $t('query.management.columns.operations.view') }}
           </a-button>
+
+          <a-popconfirm
+            :content="
+              $t('query.management.columns.operations.delete.confirm', {
+                name: record.name,
+              })
+            "
+            @ok="() => onDeleteQuery(record.id)"
+          >
+            <a-button
+              :disabled="
+                record.operatorId !== user.id && user.role !== UserRole.ADMIN
+              "
+              type="text"
+              size="small"
+              :status="record.status === 'disable' ? 'success' : 'danger'"
+            >
+              {{ $t('query.management.columns.operations.delete') }}
+            </a-button>
+          </a-popconfirm>
         </template>
       </a-table>
     </a-card>
@@ -201,18 +221,23 @@
     FetchQueryListReq,
     fetchQueryList,
     QueryStatus,
+    deleteQuery,
   } from '@/api/query';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import { RuleRecord, fetchRuleList } from '@/api/rule';
-  import { queryUserList } from '@/api/user-management';
+  import { queryAllUser } from '@/api/user-management';
   import { showUser } from '@/utils/transformer';
-  import { UserView } from '@/store/modules/user/types';
+  import { UserInfoView, UserRole } from '@/store/modules/user/types';
   import dayjs from 'dayjs';
+  import { useUserStore } from '@/store';
+  import { Message } from '@arco-design/web-vue';
 
   type Column = TableColumnData & { checked?: true };
+
+  const user = useUserStore();
 
   const generateFormModel = () => {
     return {
@@ -330,7 +355,7 @@
   };
 
   const rules = ref<RuleRecord[]>([]);
-  const users = ref<UserView[]>([]);
+  const users = ref<UserInfoView[]>([]);
   const bootstrap = async () => {
     try {
       const { data } = await fetchRuleList({});
@@ -340,8 +365,23 @@
     }
 
     try {
-      const { data } = await queryUserList({});
-      users.value = data.list;
+      const { data } = await queryAllUser();
+      users.value = data;
+    } catch (error) {
+      //
+    }
+  };
+
+  const onDeleteQuery = async (id: string) => {
+    try {
+      const data = await deleteQuery(id);
+      if (data.id === id) {
+        Message.success(t('tips.success.delete'));
+        fetchData({
+          ...pagination,
+          ...formModel.value,
+        } as unknown as FetchQueryListReq);
+      }
     } catch (error) {
       //
     }

@@ -23,3 +23,4 @@ export type UserEntity = {
 };
 
 export type UserView = Omit<UserEntity, 'password'>;
+export type UserInfoView = Pick<UserEntity, 'id' | 'nickname' | 'username'>;

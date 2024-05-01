@@ -6,7 +6,7 @@ import '@/views/workspace/mock';
 
 // import '@/views/query/management/mock';
 import '@/views/query/result/mock';
-import '@/views/query/start/mock';
+// import '@/views/query/start/mock';
 
 // import '@/views/rule/mock';
 
