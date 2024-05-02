@@ -11,7 +11,7 @@ const USER: AppRouteRecordRaw = {
     icon: 'icon-user',
     requiresAuth: true,
     hideChildrenInMenu: true,
-    order: 7,
+    order: 0,
     roles: ['*'],
   },
   children: [

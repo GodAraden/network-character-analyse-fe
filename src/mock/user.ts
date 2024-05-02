@@ -23,17 +23,17 @@ setupMock({
           role,
         });
       }
-      return failResponseWrap(null, '未登录', 50008);
+      return failResponseWrap(null, '未登录');
     });
 
     // 登录
     Mock.mock(new RegExp('/api/user/login'), (params: MockParams) => {
       const { username, password } = JSON.parse(params.body);
       if (!username) {
-        return failResponseWrap(null, '用户名不能为空', 50000);
+        return failResponseWrap(null, '用户名不能为空');
       }
       if (!password) {
-        return failResponseWrap(null, '密码不能为空', 50000);
+        return failResponseWrap(null, '密码不能为空');
       }
       if (username === 'admin' && password === 'admin') {
         window.localStorage.setItem('userRole', 'admin');
@@ -47,7 +47,7 @@ setupMock({
           token: '54321',
         });
       }
-      return failResponseWrap(null, '账号或者密码错误', 50000);
+      return failResponseWrap(null, '账号或者密码错误');
     });
 
     // 登出

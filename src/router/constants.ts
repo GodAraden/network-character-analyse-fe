@@ -9,10 +9,10 @@ export const NOT_FOUND = {
 
 export const REDIRECT_ROUTE_NAME = 'Redirect';
 
-export const DEFAULT_ROUTE_NAME = 'Workspace';
+export const DEFAULT_ROUTE_NAME = 'User';
 
 export const DEFAULT_ROUTE = {
-  title: 'menu.workspace',
+  title: 'menu.user',
   name: DEFAULT_ROUTE_NAME,
-  fullPath: '/workspace',
+  fullPath: '/user',
 };

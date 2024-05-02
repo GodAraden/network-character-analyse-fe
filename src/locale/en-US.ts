@@ -1,7 +1,5 @@
 import localeLogin from '@/views/login/locale/en-US';
 
-import localeWorkspace from '@/views/workspace/locale/en-US';
-
 import localeQueryManagement from '@/views/query/management/locale/en-US';
 import localeQueryStart from '@/views/query/start/locale/en-US';
 
@@ -19,7 +17,6 @@ import localeTips from './en-US/tips';
 
 export default {
   'title': 'Network Character Related Information Analysis System',
-  'menu.workspace': 'Workspace',
   'menu.query': 'Query Information',
   'menu.rule': 'Rule Configuration',
   'menu.user': 'User Center',
@@ -33,7 +30,6 @@ export default {
   ...localeSettings,
   ...localeTips,
   ...localeLogin,
-  ...localeWorkspace,
 
   ...localeQueryManagement,
   ...localeQueryStart,

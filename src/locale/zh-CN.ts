@@ -1,7 +1,5 @@
 import localeLogin from '@/views/login/locale/zh-CN';
 
-import localeWorkspace from '@/views/workspace/locale/zh-CN';
-
 import localeQueryManagement from '@/views/query/management/locale/zh-CN';
 import localeQueryStart from '@/views/query/start/locale/zh-CN';
 
@@ -19,7 +17,6 @@ import localeTips from './zh-CN/tips';
 
 export default {
   'title': '网络人物关联信息分析系统',
-  'menu.workspace': '工作台',
   'menu.query': '信息获取',
   'menu.rule': '规则配置',
   'menu.user': '个人中心',
@@ -33,7 +30,6 @@ export default {
   ...localeSettings,
   ...localeTips,
   ...localeLogin,
-  ...localeWorkspace,
 
   ...localeQueryManagement,
   ...localeQueryStart,
