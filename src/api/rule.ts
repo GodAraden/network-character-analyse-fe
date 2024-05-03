@@ -3,6 +3,8 @@ import axios from 'axios';
 export interface BaseInfoModel {
   name: string;
   base: string;
+  resolve: string;
+  parameter: string;
   depth: number;
 }
 

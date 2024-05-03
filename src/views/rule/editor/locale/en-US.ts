@@ -30,6 +30,18 @@ export default {
     'protocol + domain name, e.g. https://www.baidu.com/',
   'rule.editor.basic.error.base.required': 'Please enter BaseURL',
   'rule.editor.basic.error.base.pattern': 'Please enter a valid URL',
+  'rule.editor.basic.label.parameter': 'Public parameter rules',
+  'rule.editor.basic.placeholder.parameter':
+    'JSON format, restrict the content of request parameters, such as Query, Params, Body',
+  'rule.editor.basic.error.parameter.required':
+    'Please enter public parameter rules',
+  'rule.editor.basic.error.parameter.pattern': 'Please enter a valid JSON',
+  'rule.editor.basic.label.resolve': 'Public resolution rules',
+  'rule.editor.basic.placeholder.resolve':
+    'JSON format, after receiving the response, it will first be parsed according to this rule',
+  'rule.editor.basic.error.resolve.required':
+    'Please enter public resolution rules',
+  'rule.editor.basic.error.resolve.pattern': 'Please enter a legal JSON',
   'rule.editor.basic.label.depth': 'crawl depth',
   'rule.editor.basic.error.depth.required':
     'Please enter crawl depth, positive integers 1, 2, 3 are currently supported',

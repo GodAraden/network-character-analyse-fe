@@ -48,26 +48,6 @@
           />
         </a-form-item>
         <a-form-item
-          field="header"
-          validate-trigger="input"
-          :label="$t('query.start.form.label.header')"
-          :rules="[
-            {
-              required: true,
-              message: $t('query.start.form.error.header.required'),
-            },
-            {
-              validator: jsonValidator,
-              message: $t('query.start.form.error.header.pattern'),
-            },
-          ]"
-        >
-          <a-textarea
-            v-model="formData.header"
-            :placeholder="$t('query.start.form.placeholder.header')"
-          />
-        </a-form-item>
-        <a-form-item
           field="parameter"
           validate-trigger="input"
           :label="$t('query.start.form.label.parameter')"
@@ -88,19 +68,23 @@
           />
         </a-form-item>
         <a-form-item
-          field="other"
+          field="resolve"
           validate-trigger="input"
-          :label="$t('query.start.form.label.other')"
+          :label="$t('query.start.form.label.resolve')"
           :rules="[
             {
+              required: true,
+              message: $t('query.start.form.error.resolve.required'),
+            },
+            {
               validator: jsonValidator,
-              message: $t('query.start.form.error.other.pattern'),
+              message: $t('query.start.form.error.resolve.pattern'),
             },
           ]"
         >
           <a-textarea
-            v-model="formData.other"
-            :placeholder="$t('query.start.form.placeholder.other')"
+            v-model="formData.resolve"
+            :placeholder="$t('query.start.form.placeholder.resolve')"
           />
         </a-form-item>
       </a-form>

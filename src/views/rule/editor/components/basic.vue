@@ -37,7 +37,7 @@
           message: $t('rule.editor.basic.error.base.required'),
         },
         {
-          match: /^https?:\/\/([a-zA-Z0-9-]+\.?)*\/?$/,
+          match: /^https?:\/\/([a-zA-Z0-9-]+\.?)*\:?\d*\/?$/,
           message: $t('rule.editor.basic.error.base.pattern'),
         },
       ]"
@@ -45,6 +45,46 @@
       <a-input
         v-model="formData.base"
         :placeholder="$t('rule.editor.basic.placeholder.base')"
+      />
+    </a-form-item>
+    <a-form-item
+      field="parameter"
+      validate-trigger="input"
+      :label="$t('rule.editor.basic.label.parameter')"
+      :rules="[
+        {
+          required: true,
+          message: $t('rule.editor.basic.error.parameter.required'),
+        },
+        {
+          validator: jsonValidator,
+          message: $t('rule.editor.basic.error.parameter.pattern'),
+        },
+      ]"
+    >
+      <a-textarea
+        v-model="formData.parameter"
+        :placeholder="$t('rule.editor.basic.placeholder.parameter')"
+      />
+    </a-form-item>
+    <a-form-item
+      field="resolve"
+      validate-trigger="input"
+      :label="$t('rule.editor.basic.label.resolve')"
+      :rules="[
+        {
+          required: true,
+          message: $t('rule.editor.basic.error.resolve.required'),
+        },
+        {
+          validator: jsonValidator,
+          message: $t('rule.editor.basic.error.resolve.pattern'),
+        },
+      ]"
+    >
+      <a-textarea
+        v-model="formData.resolve"
+        :placeholder="$t('rule.editor.basic.placeholder.resolve')"
       />
     </a-form-item>
     <a-form-item
@@ -74,6 +114,7 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { jsonValidator } from '@/utils/json';
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import { injectFormData } from '../hooks/useFormData';
 

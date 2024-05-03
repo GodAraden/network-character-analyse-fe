@@ -132,9 +132,9 @@ export function queryRulesPresetList() {
 export interface StartQueryReq {
   ruleId: string;
   name: string;
-  header: string;
   parameter: string;
-  other?: string;
+  resolve: string;
+  items: string;
 }
 export interface StartQueryRes {
   id: string;

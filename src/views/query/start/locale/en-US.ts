@@ -9,15 +9,15 @@ export default {
   'query.start.form.error.name.pattern':
     'Please enter Chinese characters, letters, or numbers, up to 20 characters',
 
-  'query.start.form.label.header': 'Header',
-  'query.start.form.placeholder.header':
+  'query.start.form.label.resolve': 'resolve',
+  'query.start.form.placeholder.resolve':
     'JSON format. Apply to all requests in this round of queries',
-  'query.start.form.error.header.required': 'Please enter a request header',
-  'query.start.form.error.header.pattern':
-    'Please enter a correctly formatted request header',
+  'query.start.form.error.resolve.required': 'Please enter a request resolve',
+  'query.start.form.error.resolve.pattern':
+    'Please enter a correctly formatted request resolve',
   'query.start.form.label.parameter': 'Parameters',
   'query.start.form.placeholder.parameter':
-    'JSON format, applied to all requests in this round of queries, can be modified based on the resolve rules in the rule item after a request',
+    'JSON format, applied to all requests in this round of queries',
   'query.start.form.error.parameter.required':
     'Please enter request parameters',
   'query.start.form.error.parameter.pattern':

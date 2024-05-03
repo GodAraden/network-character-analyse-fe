@@ -29,6 +29,16 @@ export default {
   'rule.editor.basic.placeholder.base': '协议+域名，如: https://www.baidu.com/',
   'rule.editor.basic.error.base.required': '请输入 BaseURL',
   'rule.editor.basic.error.base.pattern': '请输入一个合法的 URL',
+  'rule.editor.basic.label.parameter': '公共参数规则',
+  'rule.editor.basic.placeholder.parameter':
+    'JSON 格式，限制请求参数包含内容，如 Query、Params、Body',
+  'rule.editor.basic.error.parameter.required': '请输入公共参数规则',
+  'rule.editor.basic.error.parameter.pattern': '请输入一个合法的 JSON',
+  'rule.editor.basic.label.resolve': '公共解析规则',
+  'rule.editor.basic.placeholder.resolve':
+    'JSON 格式，收到响应后将首先按照此规则进行解析',
+  'rule.editor.basic.error.resolve.required': '请输入公共解析规则',
+  'rule.editor.basic.error.resolve.pattern': '请输入一个合法的 JSON',
   'rule.editor.basic.label.depth': '爬取深度',
   'rule.editor.basic.error.depth.required':
     '请输入爬取深度，目前支持正整数 1, 2, 3',

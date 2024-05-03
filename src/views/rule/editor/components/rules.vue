@@ -61,7 +61,7 @@
               message: $t('rule.editor.rules.error.path.required'),
             },
             {
-              match: /^(\/[a-zA-Z0-9-]*)*$/,
+              match: /^(\/[a-zA-Z0-9-\{\}]*)*$/,
               message: $t('rule.editor.rules.error.path.pattern'),
             },
           ]"

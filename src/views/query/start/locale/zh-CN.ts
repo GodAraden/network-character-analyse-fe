@@ -7,16 +7,16 @@ export default {
   'query.start.form.placeholder.name': '输入汉字、字母或数字，最多20字符',
   'query.start.form.error.name.required': '请输入规则项名称',
   'query.start.form.error.name.pattern': '请输入汉字、字母或数字，最多20字符',
-  'query.start.form.label.header': '请求头',
-  'query.start.form.placeholder.header':
-    'JSON 格式。作用于所有本轮查询中所有的请求',
-  'query.start.form.error.header.required': '请输入请求头',
-  'query.start.form.error.header.pattern': '请输入正确格式的请求头',
-  'query.start.form.label.parameter': '请求参数',
+  'query.start.form.label.parameter': '公用请求参数',
   'query.start.form.placeholder.parameter':
-    'JSON 格式，作用于本轮查询中所有的请求，可以在一次请求结束后根据规则项中的 resolve 规则作出修改',
+    'JSON 格式，作用于本轮查询中所有的请求',
   'query.start.form.error.parameter.required': '请输入请求参数',
   'query.start.form.error.parameter.pattern': '请输入正确格式的请求参数',
+  'query.start.form.label.resolve': '公用解析规则',
+  'query.start.form.placeholder.resolve':
+    'JSON 格式。作用于所有本轮查询中所有的请求',
+  'query.start.form.error.resolve.required': '请输入公用解析规则',
+  'query.start.form.error.resolve.pattern': '请输入正确格式的公用解析规则',
   'query.start.form.label.other': '其余规则',
   'query.start.form.placeholder.other': 'JSON 格式，包含要补充的信息',
   'query.start.form.error.other.pattern': '请输入 JSON 格式的信息',
