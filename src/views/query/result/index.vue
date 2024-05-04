@@ -1,30 +1,58 @@
 <template>
   <div class="my-container">
     <Breadcrumb :items="['menu.query', 'menu.query.result']" />
-    <a-space direction="vertical" :size="16" fill>
-      <a-grid :cols="24" :col-gap="16" :row-gap="16">
-        <a-grid-item
-          :span="{ xs: 24, sm: 24, md: 24, lg: 18, xl: 18, xxl: 18 }"
+
+    <a-page-header
+      :title="query?.name"
+      :style="{ background: 'var(--color-bg-2)', marginBottom: '16px' }"
+      @back="() => $router.push({ name: 'QueryManagement' })"
+    >
+      <template #subtitle>
+        <a-typography-text type="secondary">
+          {{ $t('result.pageHeader.createAt') }}
+          {{ new Date(query?.createAt).toLocaleString() }}
+        </a-typography-text>
+      </template>
+      <template #extra>
+        <a-link
+          icon
+          @click="
+            () =>
+              $router.push({
+                name: 'RuleEditor',
+                query: { mode: 'view', id: query.ruleId },
+              })
+          "
         >
-          <DataOverview />
-        </a-grid-item>
-        <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 6, xl: 6, xxl: 6 }">
-          <UserActions style="margin-bottom: 16px" />
-          <ContentTypeDistribution />
-        </a-grid-item>
-      </a-grid>
-      <DataChainGrowth />
-      <ContentPublishingSource />
+          {{ $t('result.pageHeader.viewRule') }}
+        </a-link>
+      </template>
+    </a-page-header>
+
+    <a-space direction="vertical" :size="16" fill>
+      <template v-for="item in query?.analyse" :key="item">
+        <a-card :title="item.title">
+          <Description v-if="item.type === 'description'" :res="item.res" />
+          <Count v-else-if="item.type === 'count'" :res="item.res" />
+          <Line v-else-if="item.type === 'line'" :res="item.res" />
+          <Pie v-else-if="item.type === 'pie'" :res="item.res" />
+          <Graph v-else-if="item.type === 'graph'" :res="item.res" />
+          <template v-else>{{ item }}</template>
+        </a-card>
+      </template>
     </a-space>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import DataOverview from './components/data-overview.vue';
-  import DataChainGrowth from './components/data-chain-growth.vue';
-  import UserActions from './components/user-actions.vue';
-  import ContentTypeDistribution from './components/content-type-distribution.vue';
-  import ContentPublishingSource from './components/content-publishing-source.vue';
+  import Description from './components/description.vue';
+  import Count from './components/count.vue';
+  import Line from './components/line.vue';
+  import Pie from './components/pie.vue';
+  import Graph from './components/graph.vue';
+  import { provideShareData } from './hooks/useShareData';
+
+  const { query } = provideShareData();
 </script>
 
 <script lang="ts">

@@ -188,3 +188,10 @@ export async function deleteQuery(id: string) {
   const { data } = await axios.delete<DeleteQueryRes>(`/api/query/${id}`);
   return data;
 }
+
+export type QueryInfo = Omit<Query, 'analyse'> & { analyse: any[] };
+
+export async function fetchQueryInfo(id: string) {
+  const { data } = await axios.get<QueryInfo>(`/api/query/${id}`);
+  return data;
+}

@@ -112,9 +112,10 @@
   import { RuleRecord, fetchRuleList } from '@/api/rule';
   import { Message } from '@arco-design/web-vue';
   import { useI18n } from 'vue-i18n';
-  import { useRouter } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
 
   const { t } = useI18n();
+  const route = useRoute();
   const router = useRouter();
 
   const formData = ref<StartQueryReq>({} as StartQueryReq);
@@ -148,6 +149,10 @@
       //
     }
   };
+
+  const { ruleId, record } = route.query;
+  if (typeof ruleId === 'string') formData.value.ruleId = ruleId;
+  if (typeof record === 'string') formData.value.name = record;
 
   bootstrap();
 </script>
