@@ -124,12 +124,12 @@
     try {
       const analyse = Object.entries(props.res);
       analyse.forEach(([key, value], idx) => {
-        xAxis.value = value.map(([label]) => label);
+        xAxis.value = value.map((item: any) => item[0]);
         chartData.value.push({
           name: key,
           lineColor: lineColorArr[idx],
           itemBorderColor: itemBorderColorArr[idx],
-          data: value.map(([_, v]) => v),
+          data: value.map((item: any) => item[1]),
         });
       });
     } catch (err) {

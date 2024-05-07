@@ -10,7 +10,7 @@
       <template #subtitle>
         <a-typography-text type="secondary">
           {{ $t('result.pageHeader.createAt') }}
-          {{ new Date(query?.createAt).toLocaleString() }}
+          {{ query && new Date(query.createAt).toLocaleString() }}
         </a-typography-text>
       </template>
       <template #extra>
@@ -20,7 +20,7 @@
             () =>
               $router.push({
                 name: 'RuleEditor',
-                query: { mode: 'view', id: query.ruleId },
+                query: { mode: 'view', id: query?.ruleId },
               })
           "
         >

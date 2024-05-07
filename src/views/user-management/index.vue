@@ -108,7 +108,7 @@
         </a-col>
       </a-row>
       <a-divider style="margin-top: 0" />
-      <a-row style="margin-bottom: 16px">
+      <a-row align="center" style="margin-bottom: 16px">
         <a-col :span="12">
           <a-space>
             <a-tooltip :content="$t('userManagement.operation.create.tooltip')">
@@ -127,25 +127,12 @@
                 <icon-plus />
               </template>
             </a-input-search>
-            <a-upload action="/">
-              <template #upload-button>
-                <a-button>
-                  {{ $t('userManagement.operation.import') }}
-                </a-button>
-              </template>
-            </a-upload>
           </a-space>
         </a-col>
         <a-col
           :span="12"
           style="display: flex; align-items: center; justify-content: end"
         >
-          <a-button>
-            <template #icon>
-              <icon-download />
-            </template>
-            {{ $t('userManagement.operation.download') }}
-          </a-button>
           <a-tooltip :content="$t('userManagement.actions.refresh')">
             <div class="action-icon" @click="search"
               ><icon-refresh size="18"

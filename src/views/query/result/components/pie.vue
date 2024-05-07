@@ -83,7 +83,7 @@
           data,
         });
       }),
-    };
+    } as any;
   });
   const { loading } = useLoading(false);
 </script>
