@@ -28,6 +28,14 @@ export function provideFormData() {
     loading.value = true;
     try {
       const { data } = await fetchRuleInfo({ id: ruleId });
+      if (typeof data.parameter !== 'string') {
+        data.parameter = JSON.stringify(data.parameter);
+      }
+
+      if (typeof data.resolve !== 'string') {
+        data.resolve = JSON.stringify(data.resolve);
+      }
+
       formData.value = data;
     } catch (error) {
       // ...
